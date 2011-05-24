@@ -48,7 +48,7 @@
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx
 {
     NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [NSFont fontWithName:@"Helvetica Bold" size:64.0f], NSFontAttributeName,
+                                 [NSFont fontWithName:@"Helvetica Bold" size:48.0f], NSFontAttributeName,
                                  [NSColor whiteColor],NSForegroundColorAttributeName,
                                  [NSNumber numberWithDouble:3.0],NSKernAttributeName,nil];
     

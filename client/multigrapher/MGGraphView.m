@@ -107,7 +107,7 @@
     NSString * bottomStr = [NSString stringWithFormat:@"%0.1f",minData];
     size = [bottomStr sizeWithAttributes:topAttributes];
     NSPoint bottomDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
-                            rect.origin.y + size.height * 0.75);
+                            rect.origin.y + size.height * 0.5);
     
     NSDictionary * midAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
                   [NSFont fontWithName:@"Helvetica Bold" size:26.0f], NSFontAttributeName,

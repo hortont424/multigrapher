@@ -26,6 +26,7 @@
 #import "MGSegmentView.h"
 
 #import "MGEditingController.h"
+#import "MGCenterView.h"
 
 #import <Carbon/Carbon.h>
 
@@ -60,6 +61,9 @@
 
 - (void)setSelected:(BOOL)inSelected
 {
+    if([child isKindOfClass:[MGCenterView class]])
+        return;
+    
     selected = inSelected;
     
     [self setNeedsDisplay:YES];
