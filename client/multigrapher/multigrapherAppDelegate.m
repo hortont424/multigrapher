@@ -99,28 +99,45 @@
     if(cv == segmentCollectionView)
     {
         NSPasteboard * pboard = [draggingInfo draggingPasteboard];
-        NSData * indexData = [pboard dataForType:MGSegmentDragType];
-        NSInteger fromIndex = [[NSKeyedUnarchiver unarchiveObjectWithData:indexData] firstIndex];
+        NSData * pboardData = [pboard dataForType:MGSegmentDragType];
         
-        NSObject * fromObj = [[content arrangedObjects] objectAtIndex:fromIndex];
-        NSObject * toObj = [[content arrangedObjects] objectAtIndex:toIndex];
-        
-        if(toIndex < fromIndex)
+        if(pboardData)
         {
-            [content removeObject:fromObj];
-            [content removeObject:toObj];
-            [content insertObject:fromObj atArrangedObjectIndex:toIndex];
-            [content insertObject:toObj atArrangedObjectIndex:fromIndex];
+            NSInteger fromIndex = [[NSKeyedUnarchiver unarchiveObjectWithData:pboardData] firstIndex];
+            
+            NSObject * fromObj = [[content arrangedObjects] objectAtIndex:fromIndex];
+            NSObject * toObj = [[content arrangedObjects] objectAtIndex:toIndex];
+            
+            if(toIndex < fromIndex)
+            {
+                [content removeObject:fromObj];
+                [content removeObject:toObj];
+                [content insertObject:fromObj atArrangedObjectIndex:toIndex];
+                [content insertObject:toObj atArrangedObjectIndex:fromIndex];
+            }
+            else
+            {
+                [content removeObject:toObj];
+                [content removeObject:fromObj];
+                [content insertObject:toObj atArrangedObjectIndex:fromIndex];
+                [content insertObject:fromObj atArrangedObjectIndex:toIndex];
+            }
         }
         else
         {
+            pboardData = [pboard dataForType:MGPickerDragType];
+            
+            if(!pboardData)
+                return NO;
+            
+            NSDictionary * newSegmentInfo = [NSKeyedUnarchiver unarchiveObjectWithData:pboardData];
+            
+            NSObject * toObj = [[content arrangedObjects] objectAtIndex:toIndex];
+            NSObject * newObj = [[NSClassFromString([newSegmentInfo objectForKey:@"type"]) alloc] initWithURL:[newSegmentInfo objectForKey:@"url"]];
             [content removeObject:toObj];
-            [content removeObject:fromObj];
-            [content insertObject:toObj atArrangedObjectIndex:fromIndex];
-            [content insertObject:fromObj atArrangedObjectIndex:toIndex];
+            [content insertObject:newObj atArrangedObjectIndex:toIndex];
         }
     }
-    
     
     return YES;
 }
@@ -156,7 +173,10 @@
     }
     else if(cv == pickerCollectionView)
     {
-        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:indexes]; // Not what we actually want to copy
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:
+                         [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"MGTextView",@"type",
+                          [NSURL URLWithString:@"http://localhost/~hortont/points.txt"],@"url",nil]];
         
         [pasteboard declareTypes:[NSArray arrayWithObject:MGPickerDragType] owner:self];
         [pasteboard setData:data forType:MGPickerDragType];
