@@ -77,10 +77,6 @@
     
     NSRect segmentRect = NSInsetRect([self bounds], 10, 10);
     
-    CGContextSetGrayFillColor(ctx, 0.0f, 1.0f);
-    
-    CGContextFillRect(ctx, [self bounds]);
-    
     if(child && [child conformsToProtocol:@protocol(MGSegmentSubview)])
     {
         CGContextSaveGState(ctx);
