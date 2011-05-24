@@ -35,14 +35,18 @@
 
 @implementation multigrapherAppDelegate
 
-@synthesize window, segmentCollectionView;
+@synthesize window, segmentCollectionView, editWindow;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[MGEditingController sharedInstance] setRootView:[window contentView]];
+    [[MGEditingController sharedInstance] setEditWindow:editWindow];
 
     [window setLevel:NSFloatingWindowLevel];
     SetSystemUIMode(kUIModeAllHidden, 0);
+    
+    [editWindow setBecomesKeyOnlyIfNeeded:YES];
+    [editWindow setMovableByWindowBackground:NO];
     
     content = [[NSArrayController alloc] init];
     [segmentCollectionView bind:@"content" toObject:content withKeyPath:@"arrangedObjects" options:nil];
@@ -50,7 +54,7 @@
     [[NSURLCache sharedURLCache] setMemoryCapacity:0];
     [[NSURLCache sharedURLCache] setDiskCapacity:0];
 
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost:8000"]]];
+    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sin.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sinover.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/weird.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/aapl.csv"]]];

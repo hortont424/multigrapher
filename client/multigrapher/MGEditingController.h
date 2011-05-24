@@ -29,11 +29,13 @@
 {
     BOOL isEditing;
     NSView * rootView;
+    NSPanel * editWindow;
 }
 
 + (MGEditingController *)sharedInstance;
 
 @property (nonatomic,assign) BOOL isEditing;
 @property (nonatomic,assign) NSView * rootView;
+@property (nonatomic,assign) NSPanel * editWindow;
 
 @end

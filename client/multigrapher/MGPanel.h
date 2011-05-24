@@ -23,20 +23,11 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-#define MGSegmentDragType @"MGSegmentDragType"
-
-@interface multigrapherAppDelegate : NSObject <NSApplicationDelegate,NSCollectionViewDelegate>
+@interface MGPanel : NSPanel
 {
-    NSWindow * window;
-    NSPanel * editWindow;
-    NSCollectionView * segmentCollectionView;
-    NSArrayController * content;
+    
 }
-
-@property (assign) IBOutlet NSWindow * window;
-@property (assign) IBOutlet NSPanel * editWindow;
-@property (assign) IBOutlet NSCollectionView * segmentCollectionView;
 
 @end

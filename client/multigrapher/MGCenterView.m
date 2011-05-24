@@ -25,6 +25,8 @@
 
 #import "MGCenterView.h"
 
+#import "MGEditingController.h"
+
 @implementation MGCenterView
 
 - (id)init
@@ -45,6 +47,9 @@
 
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx
 {
+    if([[MGEditingController sharedInstance] isEditing])
+        return;
+    
     NSString * time = [[NSDate date] descriptionWithCalendarFormat:@"%H:%M" timeZone:nil
                                                             locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
 

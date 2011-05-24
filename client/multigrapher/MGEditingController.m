@@ -29,7 +29,7 @@ static MGEditingController * sharedInstance = nil;
 
 @implementation MGEditingController
 
-@synthesize isEditing, rootView;
+@synthesize isEditing, rootView, editWindow;
 
 - (id)init
 {
@@ -47,7 +47,23 @@ static MGEditingController * sharedInstance = nil;
 {
     isEditing = inIsEditing;
     
-    isEditing ? [NSCursor unhide] : [NSCursor hide];
+    if(isEditing)
+    {
+        NSRect screenFrame = [[NSScreen mainScreen] frame];
+        
+        [NSCursor unhide];
+        
+        [editWindow setFrame:NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
+                                        screenFrame.size.width / 3, screenFrame.size.height / 3) display:YES];
+        
+        [editWindow setLevel:NSScreenSaverWindowLevel];
+        [editWindow orderFront:nil];
+    }
+    else
+    {
+        [editWindow orderOut:nil];
+        [NSCursor hide];
+    }
     
     [rootView setNeedsDisplay:YES];
 }

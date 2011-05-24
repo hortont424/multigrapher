@@ -23,20 +23,19 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "MGPanel.h"
 
-#define MGSegmentDragType @"MGSegmentDragType"
+#import "MGEditingController.h"
+#import <Carbon/Carbon.h>
 
-@interface multigrapherAppDelegate : NSObject <NSApplicationDelegate,NSCollectionViewDelegate>
+@implementation MGPanel
+
+- (void)keyDown:(NSEvent *)theEvent
 {
-    NSWindow * window;
-    NSPanel * editWindow;
-    NSCollectionView * segmentCollectionView;
-    NSArrayController * content;
+    if([theEvent keyCode] == kVK_Tab)
+    {
+        [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
+    }
 }
-
-@property (assign) IBOutlet NSWindow * window;
-@property (assign) IBOutlet NSPanel * editWindow;
-@property (assign) IBOutlet NSCollectionView * segmentCollectionView;
 
 @end

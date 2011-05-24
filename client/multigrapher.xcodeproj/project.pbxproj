@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3513B11F138B732E00F1413D /* MGPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3513B11E138B732E00F1413D /* MGPanel.m */; };
 		3514BAA6138A3ECF004DAFF6 /* MGColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3514BAA5138A3ECF004DAFF6 /* MGColors.m */; };
 		351504071389D69000ABDC88 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 351504061389D69000ABDC88 /* Cocoa.framework */; };
 		351504111389D69000ABDC88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3515040F1389D69000ABDC88 /* InfoPlist.strings */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3513B11D138B732E00F1413D /* MGPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPanel.h; sourceTree = "<group>"; };
+		3513B11E138B732E00F1413D /* MGPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPanel.m; sourceTree = "<group>"; };
 		3514BAA4138A3ECF004DAFF6 /* MGColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGColors.h; sourceTree = "<group>"; };
 		3514BAA5138A3ECF004DAFF6 /* MGColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGColors.m; sourceTree = "<group>"; };
 		351504021389D69000ABDC88 /* multigrapher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = multigrapher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +143,8 @@
 				3579FE74138B15C400DF6ABB /* MGWindow.h */,
 				3579FE75138B15C400DF6ABB /* MGWindow.m */,
 				3515040D1389D69000ABDC88 /* Supporting Files */,
+				3513B11D138B732E00F1413D /* MGPanel.h */,
+				3513B11E138B732E00F1413D /* MGPanel.m */,
 			);
 			path = multigrapher;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 				3514BAA6138A3ECF004DAFF6 /* MGColors.m in Sources */,
 				3579FE76138B15C400DF6ABB /* MGWindow.m in Sources */,
 				358E552B138B501500FF555C /* MGCenterView.m in Sources */,
+				3513B11F138B732E00F1413D /* MGPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
