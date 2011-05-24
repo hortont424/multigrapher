@@ -1,0 +1,339 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3514BAA6138A3ECF004DAFF6 /* MGColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3514BAA5138A3ECF004DAFF6 /* MGColors.m */; };
+		351504071389D69000ABDC88 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 351504061389D69000ABDC88 /* Cocoa.framework */; };
+		351504111389D69000ABDC88 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3515040F1389D69000ABDC88 /* InfoPlist.strings */; };
+		351504141389D69000ABDC88 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504131389D69000ABDC88 /* main.m */; };
+		3515041A1389D69000ABDC88 /* multigrapherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504191389D69000ABDC88 /* multigrapherAppDelegate.m */; };
+		3515041D1389D69000ABDC88 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3515041B1389D69000ABDC88 /* MainMenu.xib */; };
+		351504251389D84600ABDC88 /* MGSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504241389D84600ABDC88 /* MGSegmentView.m */; };
+		351504281389DD5800ABDC88 /* MGGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504271389DD5800ABDC88 /* MGGraphView.m */; };
+		3515043C1389E1B000ABDC88 /* MGCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3515043B1389E1B000ABDC88 /* MGCollectionViewItem.m */; };
+		351504471389F19F00ABDC88 /* MGTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504461389F19F00ABDC88 /* MGTextView.m */; };
+		3579FE76138B15C400DF6ABB /* MGWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3579FE75138B15C400DF6ABB /* MGWindow.m */; };
+		3579FE79138B18D100DF6ABB /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3579FE78138B18D000DF6ABB /* Carbon.framework */; };
+		35D8E7DA138A33F100B58608 /* MGEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7D9138A33F100B58608 /* MGEditingController.m */; };
+		35D8E7DE138A359500B58608 /* MGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7DD138A359500B58608 /* MGRootView.m */; };
+		35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7E0138A375500B58608 /* MGCollectionView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3514BAA4138A3ECF004DAFF6 /* MGColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGColors.h; sourceTree = "<group>"; };
+		3514BAA5138A3ECF004DAFF6 /* MGColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGColors.m; sourceTree = "<group>"; };
+		351504021389D69000ABDC88 /* multigrapher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = multigrapher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		351504061389D69000ABDC88 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		351504091389D69000ABDC88 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		3515040A1389D69000ABDC88 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3515040B1389D69000ABDC88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3515040E1389D69000ABDC88 /* multigrapher-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "multigrapher-Info.plist"; sourceTree = "<group>"; };
+		351504101389D69000ABDC88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		351504121389D69000ABDC88 /* multigrapher-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "multigrapher-Prefix.pch"; sourceTree = "<group>"; };
+		351504131389D69000ABDC88 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		351504181389D69000ABDC88 /* multigrapherAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = multigrapherAppDelegate.h; sourceTree = "<group>"; };
+		351504191389D69000ABDC88 /* multigrapherAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = multigrapherAppDelegate.m; sourceTree = "<group>"; };
+		3515041C1389D69000ABDC88 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		351504231389D84600ABDC88 /* MGSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSegmentView.h; sourceTree = "<group>"; };
+		351504241389D84600ABDC88 /* MGSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSegmentView.m; sourceTree = "<group>"; };
+		351504261389DD5800ABDC88 /* MGGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGGraphView.h; sourceTree = "<group>"; };
+		351504271389DD5800ABDC88 /* MGGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGGraphView.m; sourceTree = "<group>"; };
+		351504291389DE8C00ABDC88 /* MGSegmentSubview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSegmentSubview.h; sourceTree = "<group>"; };
+		3515043A1389E1B000ABDC88 /* MGCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCollectionViewItem.h; sourceTree = "<group>"; };
+		3515043B1389E1B000ABDC88 /* MGCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCollectionViewItem.m; sourceTree = "<group>"; };
+		351504451389F19F00ABDC88 /* MGTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTextView.h; sourceTree = "<group>"; };
+		351504461389F19F00ABDC88 /* MGTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTextView.m; sourceTree = "<group>"; };
+		3579FE74138B15C400DF6ABB /* MGWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGWindow.h; sourceTree = "<group>"; };
+		3579FE75138B15C400DF6ABB /* MGWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGWindow.m; sourceTree = "<group>"; };
+		3579FE78138B18D000DF6ABB /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		35D8E7D8138A33F100B58608 /* MGEditingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGEditingController.h; sourceTree = "<group>"; };
+		35D8E7D9138A33F100B58608 /* MGEditingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGEditingController.m; sourceTree = "<group>"; };
+		35D8E7DC138A359500B58608 /* MGRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGRootView.h; sourceTree = "<group>"; };
+		35D8E7DD138A359500B58608 /* MGRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGRootView.m; sourceTree = "<group>"; };
+		35D8E7DF138A375500B58608 /* MGCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCollectionView.h; sourceTree = "<group>"; };
+		35D8E7E0138A375500B58608 /* MGCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCollectionView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		351503FF1389D69000ABDC88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3579FE79138B18D100DF6ABB /* Carbon.framework in Frameworks */,
+				351504071389D69000ABDC88 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		351503F71389D68F00ABDC88 = {
+			isa = PBXGroup;
+			children = (
+				3579FE78138B18D000DF6ABB /* Carbon.framework */,
+				3515040C1389D69000ABDC88 /* multigrapher */,
+				351504051389D69000ABDC88 /* Frameworks */,
+				351504031389D69000ABDC88 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		351504031389D69000ABDC88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				351504021389D69000ABDC88 /* multigrapher.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		351504051389D69000ABDC88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				351504061389D69000ABDC88 /* Cocoa.framework */,
+				351504081389D69000ABDC88 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		351504081389D69000ABDC88 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				351504091389D69000ABDC88 /* AppKit.framework */,
+				3515040A1389D69000ABDC88 /* CoreData.framework */,
+				3515040B1389D69000ABDC88 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		3515040C1389D69000ABDC88 /* multigrapher */ = {
+			isa = PBXGroup;
+			children = (
+				3515043A1389E1B000ABDC88 /* MGCollectionViewItem.h */,
+				3515043B1389E1B000ABDC88 /* MGCollectionViewItem.m */,
+				351504261389DD5800ABDC88 /* MGGraphView.h */,
+				351504271389DD5800ABDC88 /* MGGraphView.m */,
+				351504291389DE8C00ABDC88 /* MGSegmentSubview.h */,
+				351504231389D84600ABDC88 /* MGSegmentView.h */,
+				351504241389D84600ABDC88 /* MGSegmentView.m */,
+				351504451389F19F00ABDC88 /* MGTextView.h */,
+				351504461389F19F00ABDC88 /* MGTextView.m */,
+				351504181389D69000ABDC88 /* multigrapherAppDelegate.h */,
+				351504191389D69000ABDC88 /* multigrapherAppDelegate.m */,
+				3515041B1389D69000ABDC88 /* MainMenu.xib */,
+				35D8E7DF138A375500B58608 /* MGCollectionView.h */,
+				35D8E7E0138A375500B58608 /* MGCollectionView.m */,
+				35D8E7DC138A359500B58608 /* MGRootView.h */,
+				35D8E7DD138A359500B58608 /* MGRootView.m */,
+				3514BAA4138A3ECF004DAFF6 /* MGColors.h */,
+				3514BAA5138A3ECF004DAFF6 /* MGColors.m */,
+				35D8E7D8138A33F100B58608 /* MGEditingController.h */,
+				35D8E7D9138A33F100B58608 /* MGEditingController.m */,
+				3579FE74138B15C400DF6ABB /* MGWindow.h */,
+				3579FE75138B15C400DF6ABB /* MGWindow.m */,
+				3515040D1389D69000ABDC88 /* Supporting Files */,
+			);
+			path = multigrapher;
+			sourceTree = "<group>";
+		};
+		3515040D1389D69000ABDC88 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3515040E1389D69000ABDC88 /* multigrapher-Info.plist */,
+				3515040F1389D69000ABDC88 /* InfoPlist.strings */,
+				351504121389D69000ABDC88 /* multigrapher-Prefix.pch */,
+				351504131389D69000ABDC88 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		351504011389D69000ABDC88 /* multigrapher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 351504201389D69000ABDC88 /* Build configuration list for PBXNativeTarget "multigrapher" */;
+			buildPhases = (
+				351503FE1389D69000ABDC88 /* Sources */,
+				351503FF1389D69000ABDC88 /* Frameworks */,
+				351504001389D69000ABDC88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = multigrapher;
+			productName = multigrapher;
+			productReference = 351504021389D69000ABDC88 /* multigrapher.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		351503F91389D68F00ABDC88 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Rensselaer Polytechnic Institute";
+			};
+			buildConfigurationList = 351503FC1389D68F00ABDC88 /* Build configuration list for PBXProject "multigrapher" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 351503F71389D68F00ABDC88;
+			productRefGroup = 351504031389D69000ABDC88 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				351504011389D69000ABDC88 /* multigrapher */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		351504001389D69000ABDC88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				351504111389D69000ABDC88 /* InfoPlist.strings in Resources */,
+				3515041D1389D69000ABDC88 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		351503FE1389D69000ABDC88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				351504141389D69000ABDC88 /* main.m in Sources */,
+				3515041A1389D69000ABDC88 /* multigrapherAppDelegate.m in Sources */,
+				351504251389D84600ABDC88 /* MGSegmentView.m in Sources */,
+				351504281389DD5800ABDC88 /* MGGraphView.m in Sources */,
+				3515043C1389E1B000ABDC88 /* MGCollectionViewItem.m in Sources */,
+				351504471389F19F00ABDC88 /* MGTextView.m in Sources */,
+				35D8E7DA138A33F100B58608 /* MGEditingController.m in Sources */,
+				35D8E7DE138A359500B58608 /* MGRootView.m in Sources */,
+				35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */,
+				3514BAA6138A3ECF004DAFF6 /* MGColors.m in Sources */,
+				3579FE76138B15C400DF6ABB /* MGWindow.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3515040F1389D69000ABDC88 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				351504101389D69000ABDC88 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3515041B1389D69000ABDC88 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3515041C1389D69000ABDC88 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3515041E1389D69000ABDC88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3515041F1389D69000ABDC88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		351504211389D69000ABDC88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "multigrapher/multigrapher-Prefix.pch";
+				INFOPLIST_FILE = "multigrapher/multigrapher-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		351504221389D69000ABDC88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "multigrapher/multigrapher-Prefix.pch";
+				INFOPLIST_FILE = "multigrapher/multigrapher-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		351503FC1389D68F00ABDC88 /* Build configuration list for PBXProject "multigrapher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3515041E1389D69000ABDC88 /* Debug */,
+				3515041F1389D69000ABDC88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		351504201389D69000ABDC88 /* Build configuration list for PBXNativeTarget "multigrapher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				351504211389D69000ABDC88 /* Debug */,
+				351504221389D69000ABDC88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 351503F91389D68F00ABDC88 /* Project object */;
+}
