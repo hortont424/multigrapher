@@ -87,7 +87,7 @@
     NSRect originalRect = rect;
     
     NSDictionary * titleAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [NSFont fontWithName:@"Helvetica Bold" size:16.0f], NSFontAttributeName,
+                                 [NSFont fontWithName:@"Helvetica Bold" size:22.0f], NSFontAttributeName,
                                  [NSColor whiteColor],NSForegroundColorAttributeName,
                                  [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
     NSSize size = [title sizeWithAttributes:titleAttributes];
@@ -95,7 +95,7 @@
                                      rect.origin.y + rect.size.height - size.height - 15);
     
     NSDictionary * topAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  [NSFont fontWithName:@"Helvetica" size:16.0f], NSFontAttributeName,
+                  [NSFont fontWithName:@"Helvetica" size:22.0f], NSFontAttributeName,
                   [NSColor darkGrayColor],NSForegroundColorAttributeName,
                   [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
     
@@ -110,7 +110,7 @@
                             rect.origin.y + size.height * 0.75);
     
     NSDictionary * midAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  [NSFont fontWithName:@"Helvetica Bold" size:20.0f], NSFontAttributeName,
+                  [NSFont fontWithName:@"Helvetica Bold" size:26.0f], NSFontAttributeName,
                   color,NSForegroundColorAttributeName,
                   [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
     
