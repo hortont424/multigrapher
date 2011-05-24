@@ -28,8 +28,6 @@
 #import "MGEditingController.h"
 #import "MGCenterView.h"
 
-#import <Carbon/Carbon.h>
-
 @implementation MGSegmentView
 
 @synthesize child, selected;
@@ -53,10 +51,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    if([theEvent keyCode] == kVK_Tab)
-    {
-        [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
-    }
+    [MGEditingController handleEvent:theEvent];
 }
 
 - (void)setSelected:(BOOL)inSelected

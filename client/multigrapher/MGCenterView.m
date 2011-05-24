@@ -29,7 +29,7 @@
 
 @implementation MGCenterView
 
-- (id)init
+- (id)initWithURL:(NSURL *)url
 {
     self = [super init];
 

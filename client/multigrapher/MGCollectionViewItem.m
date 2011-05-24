@@ -27,8 +27,6 @@
 #import "MGSegmentView.h"
 #import "MGEditingController.h"
 
-#import <Carbon/Carbon.h>
-
 @implementation MGCollectionViewItem
 
 - (id)init
@@ -44,10 +42,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    if([theEvent keyCode] == kVK_Tab)
-    {
-        [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
-    }
+    [MGEditingController handleEvent:theEvent];
 }
 
 - (void)setRepresentedObject:(id)object

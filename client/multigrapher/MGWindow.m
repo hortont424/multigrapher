@@ -25,7 +25,6 @@
 
 #import "MGWindow.h"
 #import "MGEditingController.h"
-#import <Carbon/Carbon.h>
 
 @implementation MGWindow
 
@@ -51,10 +50,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-    if([theEvent keyCode] == kVK_Tab)
-    {
-        [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
-    }
+    [MGEditingController handleEvent:theEvent];
 }
 
 

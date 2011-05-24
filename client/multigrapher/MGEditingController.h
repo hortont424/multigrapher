@@ -33,6 +33,7 @@
 }
 
 + (MGEditingController *)sharedInstance;
++ (void)handleEvent:(NSEvent *)theEvent;
 
 @property (nonatomic,assign) BOOL isEditing;
 @property (nonatomic,assign) NSView * rootView;

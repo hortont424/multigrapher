@@ -25,6 +25,8 @@
 
 #import "MGEditingController.h"
 
+#import <Carbon/Carbon.h>
+
 static MGEditingController * sharedInstance = nil;
 
 @implementation MGEditingController
@@ -66,6 +68,14 @@ static MGEditingController * sharedInstance = nil;
     }
     
     [rootView setNeedsDisplay:YES];
+}
+
++ (void)handleEvent:(NSEvent *)theEvent
+{
+    if([theEvent keyCode] == kVK_Tab)
+    {
+        [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
+    }
 }
 
 #pragma mark Singleton Methods

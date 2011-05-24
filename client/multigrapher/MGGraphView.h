@@ -38,7 +38,6 @@
     NSURL * dataURL;
 }
 
-- (id)initWithURL:(NSURL *)url;
 - (void)updateData;
 
 @end
