@@ -1,5 +1,5 @@
-Notebook License
-================
+Multigrapher License
+====================
 
 **Copyright 2011 Tim Horton. All rights reserved.**
 
