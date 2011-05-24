@@ -45,7 +45,10 @@
     SetSystemUIMode(kUIModeAllHidden, 0);
     
     content = [[NSArrayController alloc] init];
-    [segmentCollectionView bind:@"content" toObject:content withKeyPath:@"arrangedObjects" options:nil];     
+    [segmentCollectionView bind:@"content" toObject:content withKeyPath:@"arrangedObjects" options:nil];
+
+    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
+    [[NSURLCache sharedURLCache] setDiskCapacity:0];
 
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sin.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sinover.csv"]]];
