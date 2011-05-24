@@ -29,6 +29,7 @@
 
 #import "MGSegmentView.h"
 #import "MGGraphView.h"
+#import "MGCenterView.h"
 #import "MGTextView.h"
 #import "MGEditingController.h"
 
@@ -50,9 +51,9 @@
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sinover.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/weird.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/aapl.csv"]]];
+    [content addObject:[[MGCenterView alloc] init]];
+    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
     [content addObject:[[MGTextView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/points.txt"]]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
 
@@ -60,6 +61,13 @@
     [segmentCollectionView setDelegate:self];
     [segmentCollectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
     [segmentCollectionView registerForDraggedTypes:[NSArray arrayWithObject:MGSegmentDragType]];
+
+    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+}
+
+- (void)updateTime:(NSTimer *)timer
+{
+    [segmentCollectionView setNeedsDisplay:YES];
 }
 
 -(BOOL)collectionView:(NSCollectionView *)collectionView acceptDrop:(id < NSDraggingInfo >)draggingInfo index:(NSInteger)toIndex dropOperation:(NSCollectionViewDropOperation)dropOperation
@@ -91,7 +99,7 @@
 
 -(NSDragOperation)collectionView:(NSCollectionView *)collectionView validateDrop:(id < NSDraggingInfo >)draggingInfo proposedIndex:(NSInteger *)proposedDropIndex dropOperation:(NSCollectionViewDropOperation *)proposedDropOperation
 {
-    if(*proposedDropOperation == NSCollectionViewDropBefore)
+    if(((*proposedDropIndex) == 4) || (*proposedDropOperation == NSCollectionViewDropBefore))
     {
         return NSDragOperationNone;
     }
@@ -102,7 +110,7 @@
 
 - (BOOL)collectionView:(NSCollectionView *)cv writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard
 {
-    if(![[MGEditingController sharedInstance] isEditing])
+    if((![[MGEditingController sharedInstance] isEditing]) || ([indexes firstIndex] == 4))
         return NO;
 
     NSData * data = [NSKeyedArchiver archivedDataWithRootObject:indexes];

@@ -19,6 +19,7 @@
 		351504471389F19F00ABDC88 /* MGTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504461389F19F00ABDC88 /* MGTextView.m */; };
 		3579FE76138B15C400DF6ABB /* MGWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3579FE75138B15C400DF6ABB /* MGWindow.m */; };
 		3579FE79138B18D100DF6ABB /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3579FE78138B18D000DF6ABB /* Carbon.framework */; };
+		358E552B138B501500FF555C /* MGCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 358E552A138B501500FF555C /* MGCenterView.m */; };
 		35D8E7DA138A33F100B58608 /* MGEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7D9138A33F100B58608 /* MGEditingController.m */; };
 		35D8E7DE138A359500B58608 /* MGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7DD138A359500B58608 /* MGRootView.m */; };
 		35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7E0138A375500B58608 /* MGCollectionView.m */; };
@@ -51,6 +52,8 @@
 		3579FE74138B15C400DF6ABB /* MGWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGWindow.h; sourceTree = "<group>"; };
 		3579FE75138B15C400DF6ABB /* MGWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGWindow.m; sourceTree = "<group>"; };
 		3579FE78138B18D000DF6ABB /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		358E5529138B501500FF555C /* MGCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCenterView.h; sourceTree = "<group>"; };
+		358E552A138B501500FF555C /* MGCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCenterView.m; sourceTree = "<group>"; };
 		35D8E7D8138A33F100B58608 /* MGEditingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGEditingController.h; sourceTree = "<group>"; };
 		35D8E7D9138A33F100B58608 /* MGEditingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGEditingController.m; sourceTree = "<group>"; };
 		35D8E7DC138A359500B58608 /* MGRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGRootView.h; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 			children = (
 				3515043A1389E1B000ABDC88 /* MGCollectionViewItem.h */,
 				3515043B1389E1B000ABDC88 /* MGCollectionViewItem.m */,
+				358E5529138B501500FF555C /* MGCenterView.h */,
+				358E552A138B501500FF555C /* MGCenterView.m */,
 				351504261389DD5800ABDC88 /* MGGraphView.h */,
 				351504271389DD5800ABDC88 /* MGGraphView.m */,
 				351504291389DE8C00ABDC88 /* MGSegmentSubview.h */,
@@ -223,6 +228,7 @@
 				35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */,
 				3514BAA6138A3ECF004DAFF6 /* MGColors.m in Sources */,
 				3579FE76138B15C400DF6ABB /* MGWindow.m in Sources */,
+				358E552B138B501500FF555C /* MGCenterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
