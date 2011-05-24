@@ -23,39 +23,40 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "MGWindow.h"
-#import "MGEditingController.h"
-#import <Carbon/Carbon.h>
+#import "MGPickerItemView.h"
 
-@implementation MGWindow
+@implementation MGPickerItemView
 
-- (id)initWithContentRect:(NSRect)contentRect
-                styleMask:(NSUInteger)aStyle
-                  backing:(NSBackingStoreType)bufferingType
-                    defer:(BOOL)flag
+- (id)initWithFrame:(NSRect)frame
 {
-    self = [super initWithContentRect:NSInsetRect([[NSScreen mainScreen] frame],0,0) styleMask:NSBorderlessWindowMask backing:bufferingType defer:flag];
+    self = [super initWithFrame:frame];
     
     if(self)
     {
-        
+    
     }
     
     return self;
 }
 
-- (BOOL)canBecomeKeyWindow
+- (void)dealloc
 {
-    return ![[MGEditingController sharedInstance] isEditing];
+    [super dealloc];
 }
 
-- (void)keyDown:(NSEvent *)theEvent
+- (void)drawRect:(NSRect)dirtyRect
 {
-    if([theEvent keyCode] == kVK_Tab)
-    {
-        [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
-    }
+    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    
+    CGContextSaveGState(ctx);
+    
+    NSRect segmentRect = NSInsetRect([self bounds], 5, 5);
+    
+    CGContextSetGrayFillColor(ctx, 0.5f, 1.0f);
+    
+    CGContextFillRect(ctx, segmentRect);
+    
+    CGContextRestoreGState(ctx);
 }
-
 
 @end

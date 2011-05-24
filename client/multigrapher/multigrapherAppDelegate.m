@@ -35,7 +35,7 @@
 
 @implementation multigrapherAppDelegate
 
-@synthesize window, segmentCollectionView, editWindow;
+@synthesize window, segmentCollectionView, editWindow, pickerCollectionView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -45,14 +45,17 @@
     [window setLevel:NSFloatingWindowLevel];
     SetSystemUIMode(kUIModeAllHidden, 0);
     
-    [editWindow setBecomesKeyOnlyIfNeeded:YES];
     [editWindow setMovableByWindowBackground:NO];
+    
+    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
+    [[NSURLCache sharedURLCache] setDiskCapacity:0];
+    
+    [[MGEditingController sharedInstance] setIsEditing:NO];
+    
+    // Main Segments
     
     content = [[NSArrayController alloc] init];
     [segmentCollectionView bind:@"content" toObject:content withKeyPath:@"arrangedObjects" options:nil];
-
-    [[NSURLCache sharedURLCache] setMemoryCapacity:0];
-    [[NSURLCache sharedURLCache] setDiskCapacity:0];
 
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sin.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sinover.csv"]]];
@@ -64,11 +67,25 @@
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
 
-    [[MGEditingController sharedInstance] setIsEditing:NO];
     [segmentCollectionView setDelegate:self];
     [segmentCollectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
-    [segmentCollectionView registerForDraggedTypes:[NSArray arrayWithObject:MGSegmentDragType]];
-
+    [segmentCollectionView registerForDraggedTypes:[NSArray arrayWithObjects:MGSegmentDragType,MGPickerDragType,nil]];
+    
+    // Picker
+    
+    pickerContent = [[NSArrayController alloc] init];
+    [pickerCollectionView bind:@"content" toObject:pickerContent withKeyPath:@"arrangedObjects" options:nil];
+    
+    [pickerContent addObject:[NSNumber numberWithInt:0]];
+    [pickerContent addObject:[NSNumber numberWithInt:1]];
+    [pickerContent addObject:[NSNumber numberWithInt:2]];
+    [pickerContent addObject:[NSNumber numberWithInt:3]];
+    [pickerContent addObject:[NSNumber numberWithInt:4]];
+    
+    [pickerCollectionView setDelegate:self];
+    [pickerCollectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
+    [pickerCollectionView registerForDraggedTypes:[NSArray arrayWithObjects:MGPickerDragType,nil]];
+    
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
 }
 
@@ -77,38 +94,45 @@
     [segmentCollectionView setNeedsDisplay:YES];
 }
 
--(BOOL)collectionView:(NSCollectionView *)collectionView acceptDrop:(id < NSDraggingInfo >)draggingInfo index:(NSInteger)toIndex dropOperation:(NSCollectionViewDropOperation)dropOperation
+-(BOOL)collectionView:(NSCollectionView *)cv acceptDrop:(id < NSDraggingInfo >)draggingInfo index:(NSInteger)toIndex dropOperation:(NSCollectionViewDropOperation)dropOperation
 {
-    NSPasteboard * pboard = [draggingInfo draggingPasteboard];
-    NSData * indexData = [pboard dataForType:MGSegmentDragType];
-    NSInteger fromIndex = [[NSKeyedUnarchiver unarchiveObjectWithData:indexData] firstIndex];
-	
-    NSObject * fromObj = [[content arrangedObjects] objectAtIndex:fromIndex];
-    NSObject * toObj = [[content arrangedObjects] objectAtIndex:toIndex];
+    if(cv == segmentCollectionView)
+    {
+        NSPasteboard * pboard = [draggingInfo draggingPasteboard];
+        NSData * indexData = [pboard dataForType:MGSegmentDragType];
+        NSInteger fromIndex = [[NSKeyedUnarchiver unarchiveObjectWithData:indexData] firstIndex];
+        
+        NSObject * fromObj = [[content arrangedObjects] objectAtIndex:fromIndex];
+        NSObject * toObj = [[content arrangedObjects] objectAtIndex:toIndex];
+        
+        if(toIndex < fromIndex)
+        {
+            [content removeObject:fromObj];
+            [content removeObject:toObj];
+            [content insertObject:fromObj atArrangedObjectIndex:toIndex];
+            [content insertObject:toObj atArrangedObjectIndex:fromIndex];
+        }
+        else
+        {
+            [content removeObject:toObj];
+            [content removeObject:fromObj];
+            [content insertObject:toObj atArrangedObjectIndex:fromIndex];
+            [content insertObject:fromObj atArrangedObjectIndex:toIndex];
+        }
+    }
     
-    if(toIndex < fromIndex)
-    {
-        [content removeObject:fromObj];
-        [content removeObject:toObj];
-        [content insertObject:fromObj atArrangedObjectIndex:toIndex];
-        [content insertObject:toObj atArrangedObjectIndex:fromIndex];
-    }
-    else
-    {
-        [content removeObject:toObj];
-        [content removeObject:fromObj];
-        [content insertObject:toObj atArrangedObjectIndex:fromIndex];
-        [content insertObject:fromObj atArrangedObjectIndex:toIndex];
-    }
     
     return YES;
 }
 
--(NSDragOperation)collectionView:(NSCollectionView *)collectionView validateDrop:(id < NSDraggingInfo >)draggingInfo proposedIndex:(NSInteger *)proposedDropIndex dropOperation:(NSCollectionViewDropOperation *)proposedDropOperation
+-(NSDragOperation)collectionView:(NSCollectionView *)cv validateDrop:(id < NSDraggingInfo >)draggingInfo proposedIndex:(NSInteger *)proposedDropIndex dropOperation:(NSCollectionViewDropOperation *)proposedDropOperation
 {
-    if(((*proposedDropIndex) == 4) || (*proposedDropOperation == NSCollectionViewDropBefore))
+    if(cv == segmentCollectionView)
     {
-        return NSDragOperationNone;
+        if(((*proposedDropIndex) == 4) || (*proposedDropOperation == NSCollectionViewDropBefore))
+        {
+            return NSDragOperationNone;
+        }
     }
     
     return NSDragOperationEvery;
@@ -117,13 +141,26 @@
 
 - (BOOL)collectionView:(NSCollectionView *)cv writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard
 {
-    if((![[MGEditingController sharedInstance] isEditing]) || ([indexes firstIndex] == 4))
+    if(![[MGEditingController sharedInstance] isEditing])
         return NO;
-
-    NSData * data = [NSKeyedArchiver archivedDataWithRootObject:indexes];
     
-    [pasteboard declareTypes:[NSArray arrayWithObject:MGSegmentDragType] owner:self];
-    [pasteboard setData:data forType:MGSegmentDragType];
+    if(cv == segmentCollectionView)
+    {
+        if([indexes firstIndex] == 4)
+            return NO;
+        
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:indexes];
+        
+        [pasteboard declareTypes:[NSArray arrayWithObject:MGSegmentDragType] owner:self];
+        [pasteboard setData:data forType:MGSegmentDragType];
+    }
+    else if(cv == pickerCollectionView)
+    {
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:indexes]; // Not what we actually want to copy
+        
+        [pasteboard declareTypes:[NSArray arrayWithObject:MGPickerDragType] owner:self];
+        [pasteboard setData:data forType:MGPickerDragType];
+    }
     
     return YES;
 }

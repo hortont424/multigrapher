@@ -23,31 +23,11 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "MGWindow.h"
+#import "MGPickerView.h"
 #import "MGEditingController.h"
 #import <Carbon/Carbon.h>
 
-@implementation MGWindow
-
-- (id)initWithContentRect:(NSRect)contentRect
-                styleMask:(NSUInteger)aStyle
-                  backing:(NSBackingStoreType)bufferingType
-                    defer:(BOOL)flag
-{
-    self = [super initWithContentRect:NSInsetRect([[NSScreen mainScreen] frame],0,0) styleMask:NSBorderlessWindowMask backing:bufferingType defer:flag];
-    
-    if(self)
-    {
-        
-    }
-    
-    return self;
-}
-
-- (BOOL)canBecomeKeyWindow
-{
-    return ![[MGEditingController sharedInstance] isEditing];
-}
+@implementation MGPickerView
 
 - (void)keyDown:(NSEvent *)theEvent
 {
@@ -56,6 +36,5 @@
         [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
     }
 }
-
 
 @end

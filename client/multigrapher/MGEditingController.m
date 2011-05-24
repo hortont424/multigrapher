@@ -57,7 +57,7 @@ static MGEditingController * sharedInstance = nil;
                                         screenFrame.size.width / 3, screenFrame.size.height / 3) display:YES];
         
         [editWindow setLevel:NSScreenSaverWindowLevel];
-        [editWindow orderFront:nil];
+        [editWindow makeKeyAndOrderFront:nil];
     }
     else
     {

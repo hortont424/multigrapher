@@ -23,39 +23,11 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "MGWindow.h"
-#import "MGEditingController.h"
-#import <Carbon/Carbon.h>
+#import <Foundation/Foundation.h>
 
-@implementation MGWindow
-
-- (id)initWithContentRect:(NSRect)contentRect
-                styleMask:(NSUInteger)aStyle
-                  backing:(NSBackingStoreType)bufferingType
-                    defer:(BOOL)flag
+@interface MGPickerView : NSCollectionView
 {
-    self = [super initWithContentRect:NSInsetRect([[NSScreen mainScreen] frame],0,0) styleMask:NSBorderlessWindowMask backing:bufferingType defer:flag];
     
-    if(self)
-    {
-        
-    }
-    
-    return self;
 }
-
-- (BOOL)canBecomeKeyWindow
-{
-    return ![[MGEditingController sharedInstance] isEditing];
-}
-
-- (void)keyDown:(NSEvent *)theEvent
-{
-    if([theEvent keyCode] == kVK_Tab)
-    {
-        [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
-    }
-}
-
 
 @end

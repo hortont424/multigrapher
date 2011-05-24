@@ -24,6 +24,8 @@
 		35D8E7DA138A33F100B58608 /* MGEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7D9138A33F100B58608 /* MGEditingController.m */; };
 		35D8E7DE138A359500B58608 /* MGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7DD138A359500B58608 /* MGRootView.m */; };
 		35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7E0138A375500B58608 /* MGCollectionView.m */; };
+		35DBFB2D138C5B99002C5AE6 /* MGPickerItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DBFB2C138C5B99002C5AE6 /* MGPickerItemView.m */; };
+		35DBFB31138C687C002C5AE6 /* MGPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DBFB30138C687C002C5AE6 /* MGPickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,10 @@
 		35D8E7DD138A359500B58608 /* MGRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGRootView.m; sourceTree = "<group>"; };
 		35D8E7DF138A375500B58608 /* MGCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCollectionView.h; sourceTree = "<group>"; };
 		35D8E7E0138A375500B58608 /* MGCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCollectionView.m; sourceTree = "<group>"; };
+		35DBFB2B138C5B99002C5AE6 /* MGPickerItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPickerItemView.h; sourceTree = "<group>"; };
+		35DBFB2C138C5B99002C5AE6 /* MGPickerItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPickerItemView.m; sourceTree = "<group>"; };
+		35DBFB2F138C687C002C5AE6 /* MGPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPickerView.h; sourceTree = "<group>"; };
+		35DBFB30138C687C002C5AE6 /* MGPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +140,8 @@
 				3515041B1389D69000ABDC88 /* MainMenu.xib */,
 				35D8E7DF138A375500B58608 /* MGCollectionView.h */,
 				35D8E7E0138A375500B58608 /* MGCollectionView.m */,
+				35DBFB2F138C687C002C5AE6 /* MGPickerView.h */,
+				35DBFB30138C687C002C5AE6 /* MGPickerView.m */,
 				35D8E7DC138A359500B58608 /* MGRootView.h */,
 				35D8E7DD138A359500B58608 /* MGRootView.m */,
 				3514BAA4138A3ECF004DAFF6 /* MGColors.h */,
@@ -142,9 +150,11 @@
 				35D8E7D9138A33F100B58608 /* MGEditingController.m */,
 				3579FE74138B15C400DF6ABB /* MGWindow.h */,
 				3579FE75138B15C400DF6ABB /* MGWindow.m */,
-				3515040D1389D69000ABDC88 /* Supporting Files */,
 				3513B11D138B732E00F1413D /* MGPanel.h */,
 				3513B11E138B732E00F1413D /* MGPanel.m */,
+				35DBFB2B138C5B99002C5AE6 /* MGPickerItemView.h */,
+				35DBFB2C138C5B99002C5AE6 /* MGPickerItemView.m */,
+				3515040D1389D69000ABDC88 /* Supporting Files */,
 			);
 			path = multigrapher;
 			sourceTree = "<group>";
@@ -235,6 +245,8 @@
 				3579FE76138B15C400DF6ABB /* MGWindow.m in Sources */,
 				358E552B138B501500FF555C /* MGCenterView.m in Sources */,
 				3513B11F138B732E00F1413D /* MGPanel.m in Sources */,
+				35DBFB2D138C5B99002C5AE6 /* MGPickerItemView.m in Sources */,
+				35DBFB31138C687C002C5AE6 /* MGPickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

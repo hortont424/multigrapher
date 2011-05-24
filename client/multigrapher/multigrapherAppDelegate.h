@@ -26,17 +26,21 @@
 #import <Cocoa/Cocoa.h>
 
 #define MGSegmentDragType @"MGSegmentDragType"
+#define MGPickerDragType @"MGPickerDragType"
 
 @interface multigrapherAppDelegate : NSObject <NSApplicationDelegate,NSCollectionViewDelegate>
 {
     NSWindow * window;
     NSPanel * editWindow;
     NSCollectionView * segmentCollectionView;
+    NSCollectionView * pickerCollectionView;
     NSArrayController * content;
+    NSArrayController * pickerContent;
 }
 
 @property (assign) IBOutlet NSWindow * window;
 @property (assign) IBOutlet NSPanel * editWindow;
 @property (assign) IBOutlet NSCollectionView * segmentCollectionView;
+@property (assign) IBOutlet NSCollectionView * pickerCollectionView;
 
 @end
