@@ -30,8 +30,10 @@
 @interface MGTextView : NSObject<MGSegmentSubview>
 {
     NSString * data;
+    NSURL * dataURL;
 }
 
 - (id)initWithURL:(NSURL *)url;
+- (void)updateData;
 
 @end

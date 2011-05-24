@@ -33,11 +33,24 @@
     
     if(self)
     {
-        data = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-        data = [data stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        dataURL = url;
+        [self updateData];
+        
+        [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(tick:) userInfo:nil repeats:YES];
     }
     
     return self;
+}
+
+- (void)tick:(NSTimer *)timer
+{
+    [self updateData];
+}
+
+- (void)updateData
+{
+    data = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:nil];
+    data = [data stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (bool)wantsBorder

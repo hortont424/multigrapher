@@ -35,46 +35,61 @@
     
     if(self)
     {
-        NSString * rawData = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-        NSArray * rows = [rawData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-        title = [rows objectAtIndex:0];
-        NSArray * titleParts = [title componentsSeparatedByString:@","];
-        title = [titleParts objectAtIndex:0];
+        dataURL = url;
+        [self updateData];
         
-        if([titleParts count] > 1)
-        {
-            color = [MGColors colorWithKey:[titleParts objectAtIndex:1]];
-        }
-        
-        if(color == nil)
-        {
-            color = [MGColors colorWithKey:@"blue"];
-        }
-        
-        long rowCount = dataCount = [rows count] - 1;
-        data = (double *)calloc(dataCount, sizeof(double));
-        minData = maxData = [[rows objectAtIndex:1] doubleValue];
-        
-        barLocations = [[NSMutableIndexSet alloc] init];
-        
-        for(int i = 1, actualIndex = 1; i <= rowCount; i++)
-        {
-            if([[rows objectAtIndex:i] isEqualToString:@"--"])
-            {
-                [barLocations addIndex:actualIndex];
-                dataCount--;
-            }
-            else
-            {
-                data[actualIndex] = [[rows objectAtIndex:i] doubleValue];
-                minData = MIN(minData, data[actualIndex]);
-                maxData = MAX(maxData, data[actualIndex]);
-                actualIndex++;
-            }
-        }
+        // TODO: these should all be global, and synchronized
+        [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(tick:) userInfo:nil repeats:YES];
     }
     
     return self;
+}
+
+- (void)tick:(NSTimer *)timer
+{
+    [self updateData];
+}
+
+- (void)updateData
+{
+    // TODO: better error handling when the server doesn't respond
+    NSString * rawData = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:nil];
+    NSArray * rows = [rawData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    title = [rows objectAtIndex:0];
+    NSArray * titleParts = [title componentsSeparatedByString:@","];
+    title = [titleParts objectAtIndex:0];
+    
+    if([titleParts count] > 1)
+    {
+        color = [MGColors colorWithKey:[titleParts objectAtIndex:1]];
+    }
+    
+    if(color == nil)
+    {
+        color = [MGColors colorWithKey:@"blue"];
+    }
+    
+    long rowCount = dataCount = [rows count] - 1;
+    data = (double *)calloc(dataCount, sizeof(double));
+    minData = maxData = [[rows objectAtIndex:1] doubleValue];
+    
+    barLocations = [[NSMutableIndexSet alloc] init];
+    
+    for(int i = 1, actualIndex = 1; i <= rowCount; i++)
+    {
+        if([[rows objectAtIndex:i] isEqualToString:@"--"])
+        {
+            [barLocations addIndex:actualIndex];
+            dataCount--;
+        }
+        else
+        {
+            data[actualIndex] = [[rows objectAtIndex:i] doubleValue];
+            minData = MIN(minData, data[actualIndex]);
+            maxData = MAX(maxData, data[actualIndex]);
+            actualIndex++;
+        }
+    }
 }
 
 - (bool)wantsBorder

@@ -45,11 +45,11 @@
 
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx
 {
-    NSString * time = [[NSDate date] descriptionWithCalendarFormat:@"%H:%M:%S" timeZone:nil
+    NSString * time = [[NSDate date] descriptionWithCalendarFormat:@"%H:%M" timeZone:nil
                                                             locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
 
     NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [NSFont fontWithName:@"Helvetica Bold" size:82.0f], NSFontAttributeName,
+                                 [NSFont fontWithName:@"Helvetica Bold" size:144.0f], NSFontAttributeName,
                                  [NSColor whiteColor],NSForegroundColorAttributeName,
                                  [NSNumber numberWithDouble:3.0],NSKernAttributeName,nil];
 

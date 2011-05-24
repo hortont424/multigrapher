@@ -50,7 +50,7 @@
     [[NSURLCache sharedURLCache] setMemoryCapacity:0];
     [[NSURLCache sharedURLCache] setDiskCapacity:0];
 
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sin.csv"]]];
+    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost:8000"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sinover.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/weird.csv"]]];
     [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/aapl.csv"]]];

@@ -35,8 +35,10 @@
     NSMutableIndexSet * barLocations;
     NSString * title;
     NSColor * color;
+    NSURL * dataURL;
 }
 
 - (id)initWithURL:(NSURL *)url;
+- (void)updateData;
 
 @end
