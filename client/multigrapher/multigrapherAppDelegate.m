@@ -45,6 +45,12 @@
     [window setLevel:NSFloatingWindowLevel];
     SetSystemUIMode(kUIModeAllHidden, 0);
     
+    NSSize segmentSize = NSMakeSize([[NSScreen mainScreen] frame].size.width / 3,
+                                    [[NSScreen mainScreen] frame].size.height / 3);
+    
+    [segmentCollectionView setMaxItemSize:segmentSize];
+    [segmentCollectionView setMinItemSize:segmentSize];
+    
     [editWindow setMovableByWindowBackground:NO];
     
     [[NSURLCache sharedURLCache] setMemoryCapacity:0];
