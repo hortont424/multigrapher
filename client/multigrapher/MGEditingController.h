@@ -27,18 +27,21 @@
 
 #import "multigrapherAppDelegate.h"
 
+@class MGRootView;
+@class MGPanel;
+
 @interface MGEditingController : NSObject
 {
     BOOL isEditing;
-    NSView * rootView;
-    NSPanel * editWindow;
+    MGRootView * rootView;
+    MGPanel * editWindow;
 }
 
 + (MGEditingController *)sharedInstance;
 + (void)handleEvent:(NSEvent *)theEvent;
 
 @property (nonatomic,assign) BOOL isEditing;
-@property (nonatomic,assign) NSView * rootView;
-@property (nonatomic,assign) NSPanel * editWindow;
+@property (nonatomic,assign) MGRootView * rootView;
+@property (nonatomic,assign) MGPanel * editWindow;
 
 @end

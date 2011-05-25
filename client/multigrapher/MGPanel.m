@@ -34,4 +34,28 @@
     [MGEditingController handleEvent:theEvent];
 }
 
+- (void)fadeOut
+{
+    float alpha = 1.0;
+    [self setAlphaValue:alpha];
+    [self makeKeyAndOrderFront:self];
+    for (int x = 0; x < 10; x++) {
+        alpha -= 0.1;
+        [self setAlphaValue:alpha];
+        [NSThread sleepForTimeInterval:0.020];
+    }
+}
+
+- (void)fadeIn
+{
+    float alpha = 0.0;
+    [self setAlphaValue:alpha];
+    [self makeKeyAndOrderFront:self];
+    for (int x = 0; x < 10; x++) {
+        alpha += 0.1;
+        [self setAlphaValue:alpha];
+        [NSThread sleepForTimeInterval:0.020];
+    }
+}
+
 @end

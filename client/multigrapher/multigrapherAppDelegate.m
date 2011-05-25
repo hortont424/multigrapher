@@ -41,10 +41,21 @@
 
 @implementation multigrapherAppDelegate
 
-@synthesize window, segmentCollectionView, editWindow, pickerCollectionView;
+@synthesize window, segmentCollectionView, editWindow, pickerCollectionView, content;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    content = [[NSArrayController alloc] init];
+    pickerContent = [[NSArrayController alloc] init];
+    
+    for(int i = 0; i < SEGMENT_COLUMNS * SEGMENT_ROWS; i++)
+    {
+        if(i == 4)
+            [content addObject:[[MGCenterView alloc] init]];
+        else
+            [content addObject:[[MGBlankView alloc] init]];
+    }
+    
     [[MGEditingController sharedInstance] setRootView:[window contentView]];
     [[MGEditingController sharedInstance] setEditWindow:editWindow];
 
@@ -64,28 +75,18 @@
     [[NSURLCache sharedURLCache] setMemoryCapacity:0];
     [[NSURLCache sharedURLCache] setDiskCapacity:0];
     
-    [[MGEditingController sharedInstance] setIsEditing:NO];
+    [[MGEditingController sharedInstance] setIsEditing:YES];
     
     // Main Segments
-    
-    content = [[NSArrayController alloc] init];
+
     [segmentCollectionView bind:@"content" toObject:content withKeyPath:@"arrangedObjects" options:nil];
-    
-    for(int i = 0; i < SEGMENT_COLUMNS * SEGMENT_ROWS; i++)
-    {
-        if(i == 4)
-            [content addObject:[[MGCenterView alloc] init]];
-        else
-            [content addObject:[[MGBlankView alloc] init]];
-    }
 
     [segmentCollectionView setDelegate:self];
     [segmentCollectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
     [segmentCollectionView registerForDraggedTypes:[NSArray arrayWithObjects:MGSegmentDragType,MGPickerDragType,nil]];
     
     // Picker
-    
-    pickerContent = [[NSArrayController alloc] init];
+
     [pickerCollectionView bind:@"content" toObject:pickerContent withKeyPath:@"arrangedObjects" options:nil];
     
     [pickerCollectionView setDelegate:self];
@@ -207,6 +208,10 @@
         {
             return NSDragOperationNone;
         }
+    }
+    else
+    {
+        return NSDragOperationNone;
     }
     
     return NSDragOperationEvery;

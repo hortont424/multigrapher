@@ -28,8 +28,13 @@
 #import "multigrapherAppDelegate.h"
 
 #import <Carbon/Carbon.h>
+#import "MGSegmentSubview.h"
+#import "MGBlankView.h"
+#import "MGPanel.h"
+#import "MGCenterView.h"
 
 static MGEditingController * sharedInstance = nil;
+static bool haveShownInitialHelp = NO;
 
 @implementation MGEditingController
 
@@ -41,34 +46,70 @@ static MGEditingController * sharedInstance = nil;
     
     if(self)
     {
-        
+        [[[NSApp delegate] content] addObserver:self
+                                     forKeyPath:@"arrangedObjects"
+                                        options:(NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld)
+                                        context:NULL];
     }
     
     return self;
 }
 
+- (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)Object change:(NSDictionary*)change context:(void*)context
+{
+    if(!haveShownInitialHelp)
+        [self setIsEditing:[self isEditing]];
+}
+
 - (void)setIsEditing:(BOOL)inIsEditing
 {
+    bool oldIsEditing = isEditing;
     isEditing = inIsEditing;
+    
+    NSRect screenFrame = [[NSScreen mainScreen] frame];
     
     if(isEditing)
     {
-        NSRect screenFrame = [[NSScreen mainScreen] frame];
+        if(oldIsEditing != isEditing)
+            [editWindow setAlphaValue:1.0f];
         
         [NSCursor unhide];
         
-        NSRect frame = NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
-                                  screenFrame.size.width / 3, screenFrame.size.height / 3);
+        NSRect frame;
+        
+        bool anyNonEmpty = false;
+        
+        for(id<MGSegmentSubview> sv in [[[NSApp delegate] content] arrangedObjects])
+        {
+            if(!([sv isKindOfClass:[MGBlankView class]] || [sv isKindOfClass:[MGCenterView class]]))
+                anyNonEmpty = true;
+        }
+        
+        haveShownInitialHelp |= anyNonEmpty;
+        
+        if(anyNonEmpty || haveShownInitialHelp)
+        {
+            frame = NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
+                               screenFrame.size.width / 3, screenFrame.size.height / 3);
+        }
+        else
+        {
+            frame = NSMakeRect(screenFrame.size.width / 4, screenFrame.size.height / 4,
+                               screenFrame.size.width / 2, screenFrame.size.height / 2);
+        }
+        
         frame = NSInsetRect(frame, 5, 5);
         
-        [editWindow setFrame:frame display:YES];
+        [editWindow setFrame:frame display:YES animate:(oldIsEditing == isEditing)];
         
-        [editWindow setLevel:NSScreenSaverWindowLevel];
+        [editWindow setLevel:NSModalPanelWindowLevel];
         [editWindow makeKeyAndOrderFront:nil];
     }
     else
     {
-        [editWindow orderOut:nil];
+        if(oldIsEditing != isEditing)
+            [editWindow setAlphaValue:0.0f];
+        
         [NSCursor hide];
     }
     

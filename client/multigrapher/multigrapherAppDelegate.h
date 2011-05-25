@@ -47,6 +47,8 @@
 @property (assign) IBOutlet NSCollectionView * segmentCollectionView;
 @property (assign) IBOutlet NSCollectionView * pickerCollectionView;
 
+@property (assign) NSArrayController * content;
+
 - (void)deleteSelected;
 
 @end
