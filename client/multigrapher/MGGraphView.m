@@ -72,7 +72,7 @@
     
     barLocations = [[NSMutableIndexSet alloc] init];
     
-    for(int i = 1, actualIndex = 1; i <= rowCount; i++)
+    for(int i = 1, actualIndex = 0; i <= rowCount; i++)
     {
         if([[rows objectAtIndex:i] isEqualToString:@"--"])
         {
@@ -94,46 +94,52 @@
     return YES;
 }
 
-- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx
+- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature
 {
     NSRect originalRect = rect;
+    NSString * topStr, * bottomStr, * midStr;
+    NSDictionary * titleAttributes, * topAttributes, * midAttributes;
+    NSPoint titleDrawPoint, topDrawPoint, bottomDrawPoint, midDrawPoint;
     
-    NSDictionary * titleAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [NSFont fontWithName:@"Helvetica Bold" size:22.0f], NSFontAttributeName,
-                                 [NSColor whiteColor],NSForegroundColorAttributeName,
-                                 [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
-    NSSize size = [title sizeWithAttributes:titleAttributes];
-    NSPoint titleDrawPoint = NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
-                                     rect.origin.y + rect.size.height - size.height - 15);
-    
-    NSDictionary * topAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  [NSFont fontWithName:@"Helvetica" size:22.0f], NSFontAttributeName,
-                  [NSColor darkGrayColor],NSForegroundColorAttributeName,
-                  [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
-    
-    NSString * topStr = [NSString stringWithFormat:@"%0.1f",maxData];
-    size = [topStr sizeWithAttributes:topAttributes];
-    NSPoint topDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
-                             rect.origin.y + rect.size.height - size.height - 15);
-
-    NSString * bottomStr = [NSString stringWithFormat:@"%0.1f",minData];
-    size = [bottomStr sizeWithAttributes:topAttributes];
-    NSPoint bottomDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
-                            rect.origin.y + size.height * 0.5);
-    
-    NSDictionary * midAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  [NSFont fontWithName:@"Helvetica Bold" size:26.0f], NSFontAttributeName,
-                  color,NSForegroundColorAttributeName,
-                  [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
-    
-    NSString * midStr = [NSString stringWithFormat:@"%0.2f",data[dataCount]];
-    size = [midStr sizeWithAttributes:midAttributes];
-    NSPoint midDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
-                            rect.origin.y + (rect.size.height / 2.0f) - (size.height / 2.0f));
-    
-    rect.size.height -= size.height + 10;
-    rect.origin.y += 3;
-    rect.size.width -= size.width + 25;
+    if(!miniature)
+    {
+        titleAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                           [NSFont fontWithName:@"Helvetica Bold" size:22.0f], NSFontAttributeName,
+                           [NSColor whiteColor],NSForegroundColorAttributeName,
+                           [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
+        NSSize size = [title sizeWithAttributes:titleAttributes];
+        titleDrawPoint = NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
+                                      rect.origin.y + rect.size.height - size.height - 15);
+        
+        topAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         [NSFont fontWithName:@"Helvetica" size:22.0f], NSFontAttributeName,
+                         [NSColor darkGrayColor],NSForegroundColorAttributeName,
+                         [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
+        
+        topStr = [NSString stringWithFormat:@"%0.1f",maxData];
+        size = [topStr sizeWithAttributes:topAttributes];
+        topDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
+                                    rect.origin.y + rect.size.height - size.height - 15);
+        
+        bottomStr = [NSString stringWithFormat:@"%0.1f",minData];
+        size = [bottomStr sizeWithAttributes:topAttributes];
+        bottomDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
+                                       rect.origin.y + size.height * 0.5);
+        
+        midAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         [NSFont fontWithName:@"Helvetica Bold" size:26.0f], NSFontAttributeName,
+                         color,NSForegroundColorAttributeName,
+                         [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
+        
+        midStr = [NSString stringWithFormat:@"%0.2f",data[dataCount-1]];
+        size = [midStr sizeWithAttributes:midAttributes];
+        midDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
+                                    rect.origin.y + (rect.size.height / 2.0f) - (size.height / 2.0f));
+        
+        rect.size.height -= size.height + 10;
+        rect.origin.y += 3;
+        rect.size.width -= size.width + 25;
+    }
     
     double xPerRow = rect.size.width / dataCount;
     double x = rect.origin.x;
@@ -142,18 +148,26 @@
     double scale = (rect.size.height / amplitude) * 0.9;
     double shift = (rect.size.height / 2.0f) - ((maxData*scale + minData*scale) / 2.0f);
     
-    CGContextSetGrayStrokeColor(ctx, 0.1f, 1.0f);
-    CGContextSetLineWidth(ctx, 3.0f);
-    [barLocations enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-        CGContextMoveToPoint(ctx, rect.origin.x + (xPerRow * idx), rect.origin.y);
-        CGContextAddLineToPoint(ctx, rect.origin.x + (xPerRow * idx), rect.origin.y + originalRect.size.height);
-    }];
-    CGContextStrokePath(ctx);
+    if([barLocations count] > 0)
+    {
+        CGContextSetGrayStrokeColor(ctx, 0.1f, 1.0f);
+        CGContextSetLineWidth(ctx, 3.0f);
+        [barLocations enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+            CGContextMoveToPoint(ctx, rect.origin.x + (xPerRow * idx), rect.origin.y);
+            CGContextAddLineToPoint(ctx, rect.origin.x + (xPerRow * idx), rect.origin.y + originalRect.size.height);
+        }];
+        CGContextStrokePath(ctx);
+    }
     
-    [title drawAtPoint:titleDrawPoint withAttributes:titleAttributes];
-    [topStr drawAtPoint:topDrawPoint withAttributes:topAttributes];
-    [bottomStr drawAtPoint:bottomDrawPoint withAttributes:topAttributes];
-    [midStr drawAtPoint:midDrawPoint withAttributes:midAttributes];
+    if(!miniature)
+    {
+        [title drawAtPoint:titleDrawPoint withAttributes:titleAttributes];
+        [topStr drawAtPoint:topDrawPoint withAttributes:topAttributes];
+        [bottomStr drawAtPoint:bottomDrawPoint withAttributes:topAttributes];
+        [midStr drawAtPoint:midDrawPoint withAttributes:midAttributes];
+    }
+    
+    CGContextBeginPath(ctx);
     
     for(int i = 0; i < dataCount; i++)
     {

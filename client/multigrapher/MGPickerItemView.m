@@ -30,7 +30,7 @@
 
 @implementation MGPickerItemView
 
-@synthesize child, selected, itemClass, itemURL;
+@synthesize child, selected, itemClass, itemURL, fakeItem;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -82,6 +82,8 @@
     }
     
     itemURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d", [child hostName], [child port]]];
+    
+    fakeItem = [[itemClass alloc] initWithURL:itemURL];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -91,13 +93,21 @@
     CGContextSaveGState(ctx);
     
     NSRect rect = NSInsetRect([self bounds], 5, 5);
+    NSRect iconRect = NSMakeRect(rect.origin.x, rect.origin.y + 20, rect.size.width, rect.size.height - 20);
     
-    CGContextSetGrayFillColor(ctx, 0.2f, 1.0f);
-    CGContextFillRect(ctx, CGRectMake(rect.origin.x, rect.origin.y + 20, rect.size.width, rect.size.height - 20));
+    [[NSColor colorWithCalibratedWhite:0.1f alpha:1.0f] setFill];
+    [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect(iconRect, 5, 5) xRadius:10 yRadius:10] fill];
+    
+    [fakeItem drawSegmentInRect:NSInsetRect(iconRect, 6, 6) withContext:ctx miniature:YES];
+    
+    [[NSColor colorWithCalibratedWhite:0.3f alpha:1.0f] setStroke];
+    [NSBezierPath setDefaultLineWidth:3.0f];
+    [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect(iconRect, 5, 5) xRadius:10 yRadius:10] stroke];
+    
     
     if(selected)
     {
-        [[NSColor colorWithCalibratedWhite:0.3f alpha:1.0f] setStroke];
+        [[NSColor colorWithCalibratedWhite:0.5f alpha:1.0f] setStroke];
         [NSBezierPath setDefaultLineWidth:3.0f];
         [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 3, 3) xRadius:10 yRadius:10] stroke];
     }

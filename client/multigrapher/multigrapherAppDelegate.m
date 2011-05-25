@@ -122,8 +122,18 @@
     {
         [subview tick];
     }
-
+    
     [segmentCollectionView setNeedsDisplay:YES];
+    
+    if([[MGEditingController sharedInstance] isEditing])
+    {
+        for(int i = 0; i < [[pickerContent arrangedObjects] count]; i++)
+        {
+            [[(MGPickerItemView *)[[pickerCollectionView itemAtIndex:i] view] fakeItem] tick];
+        }
+        
+        [pickerCollectionView setNeedsDisplay:YES];
+    }
 }
 
 -(BOOL)collectionView:(NSCollectionView *)cv acceptDrop:(id < NSDraggingInfo >)draggingInfo index:(NSInteger)toIndex dropOperation:(NSCollectionViewDropOperation)dropOperation

@@ -76,7 +76,7 @@
     {
         CGContextSaveGState(ctx);
         CGContextClipToRect(ctx, segmentRect);
-        [child drawSegmentInRect:[self bounds] withContext:ctx];
+        [child drawSegmentInRect:[self bounds] withContext:ctx miniature:NO];
         CGContextRestoreGState(ctx);
         
         if([child wantsBorder])

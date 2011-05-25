@@ -56,7 +56,7 @@
     return NO;
 }
 
-- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx
+- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature
 {
     NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
                                  [NSFont fontWithName:@"Helvetica Bold" size:48.0f], NSFontAttributeName,

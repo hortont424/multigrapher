@@ -28,7 +28,7 @@
 @protocol MGSegmentSubview <NSObject>
 
 - (id)initWithURL:(NSURL *)url;
-- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx;
+- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature;
 - (bool)wantsBorder;
 - (void)tick;
 

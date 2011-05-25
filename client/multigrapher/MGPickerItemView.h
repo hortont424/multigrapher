@@ -35,10 +35,13 @@
     NSString * actualName;
     Class itemClass;
     NSURL * itemURL;
+    
+    id<MGSegmentSubview> fakeItem;
 }
 
 @property (nonatomic,readonly) Class itemClass;
 @property (nonatomic,readonly) NSURL * itemURL;
+@property (nonatomic,readonly) id<MGSegmentSubview> fakeItem;
 
 @property (nonatomic,assign) NSNetService * child;
 @property (nonatomic,assign) BOOL selected;

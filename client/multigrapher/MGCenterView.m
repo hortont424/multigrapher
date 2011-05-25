@@ -50,7 +50,7 @@
     return NO;
 }
 
-- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx
+- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature
 {
     if([[MGEditingController sharedInstance] isEditing])
         return;
