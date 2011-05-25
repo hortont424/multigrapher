@@ -55,8 +55,11 @@ static MGEditingController * sharedInstance = nil;
         
         [NSCursor unhide];
         
-        [editWindow setFrame:NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
-                                        screenFrame.size.width / 3, screenFrame.size.height / 3) display:YES];
+        NSRect frame = NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
+                                  screenFrame.size.width / 3, screenFrame.size.height / 3);
+        frame = NSInsetRect(frame, 5, 5);
+        
+        [editWindow setFrame:frame display:YES];
         
         [editWindow setLevel:NSScreenSaverWindowLevel];
         [editWindow makeKeyAndOrderFront:nil];
