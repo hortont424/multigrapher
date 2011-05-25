@@ -136,6 +136,18 @@
     }
 }
 
+- (void)deleteSelected
+{
+    NSIndexSet * selected = [segmentCollectionView selectionIndexes];
+    
+    if([selected count] > 0)
+    {
+        [content removeObjectAtArrangedObjectIndex:[selected firstIndex]];
+        [content insertObject:[[MGBlankView alloc] init] atArrangedObjectIndex:[selected firstIndex]];
+        [segmentCollectionView setSelectionIndexes:[[NSIndexSet alloc] init]];
+    }
+}
+
 -(BOOL)collectionView:(NSCollectionView *)cv acceptDrop:(id < NSDraggingInfo >)draggingInfo index:(NSInteger)toIndex dropOperation:(NSCollectionViewDropOperation)dropOperation
 {
     if(cv == segmentCollectionView)
@@ -156,6 +168,7 @@
                 [content removeObject:toObj];
                 [content insertObject:fromObj atArrangedObjectIndex:toIndex];
                 [content insertObject:toObj atArrangedObjectIndex:fromIndex];
+                [segmentCollectionView setSelectionIndexes:[[NSIndexSet alloc] init]];
             }
             else
             {
@@ -163,6 +176,7 @@
                 [content removeObject:fromObj];
                 [content insertObject:toObj atArrangedObjectIndex:fromIndex];
                 [content insertObject:fromObj atArrangedObjectIndex:toIndex];
+                [segmentCollectionView setSelectionIndexes:[[NSIndexSet alloc] init]];
             }
         }
         else
@@ -178,6 +192,7 @@
             NSObject * newObj = [[NSClassFromString([newSegmentInfo objectForKey:@"type"]) alloc] initWithURL:[newSegmentInfo objectForKey:@"url"]];
             [content removeObject:toObj];
             [content insertObject:newObj atArrangedObjectIndex:toIndex];
+            [segmentCollectionView setSelectionIndexes:[[NSIndexSet alloc] init]];
         }
     }
     

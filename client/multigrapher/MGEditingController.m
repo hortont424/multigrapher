@@ -25,6 +25,8 @@
 
 #import "MGEditingController.h"
 
+#import "multigrapherAppDelegate.h"
+
 #import <Carbon/Carbon.h>
 
 static MGEditingController * sharedInstance = nil;
@@ -78,6 +80,11 @@ static MGEditingController * sharedInstance = nil;
     if([theEvent keyCode] == kVK_Tab)
     {
         [[MGEditingController sharedInstance] setIsEditing:![[MGEditingController sharedInstance] isEditing]];
+    }
+    
+    if([theEvent keyCode] == kVK_Delete)
+    {
+        [[NSApp delegate] deleteSelected];
     }
 }
 

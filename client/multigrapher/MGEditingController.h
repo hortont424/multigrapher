@@ -25,6 +25,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "multigrapherAppDelegate.h"
+
 @interface MGEditingController : NSObject
 {
     BOOL isEditing;

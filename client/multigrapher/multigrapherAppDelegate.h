@@ -47,4 +47,6 @@
 @property (assign) IBOutlet NSCollectionView * segmentCollectionView;
 @property (assign) IBOutlet NSCollectionView * pickerCollectionView;
 
+- (void)deleteSelected;
+
 @end
