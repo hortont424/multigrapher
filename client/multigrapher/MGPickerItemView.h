@@ -43,6 +43,4 @@
 @property (nonatomic,assign) NSNetService * child;
 @property (nonatomic,assign) BOOL selected;
 
-- (NSObject<MGSegmentSubview> *)createInstance;
-
 @end

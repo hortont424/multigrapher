@@ -28,6 +28,7 @@
 #import <Carbon/Carbon.h>
 
 #import "MGSegmentView.h"
+#import "MGSegmentSubview.h"
 #import "MGGraphView.h"
 #import "MGCenterView.h"
 #import "MGTextView.h"
@@ -190,6 +191,9 @@
     if(cv == segmentCollectionView)
     {
         if([indexes firstIndex] == 4)
+            return NO;
+        
+        if([[[segmentCollectionView itemAtIndex:[indexes firstIndex]] representedObject] isKindOfClass:[MGBlankView class]])
             return NO;
         
         NSData * data = [NSKeyedArchiver archivedDataWithRootObject:indexes];
