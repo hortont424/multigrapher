@@ -31,6 +31,7 @@
 {
     NSString * data;
     NSURL * dataURL;
+    bool dataLoaded;
 }
 
 - (void)updateData;

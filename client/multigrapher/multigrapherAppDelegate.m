@@ -50,8 +50,8 @@
 
     allServices = [[NSMutableArray alloc] init];
     
-    [window setLevel:NSFloatingWindowLevel];
-    SetSystemUIMode(kUIModeAllHidden, 0);
+    //[window setLevel:NSFloatingWindowLevel];
+    //SetSystemUIMode(kUIModeAllHidden, 0);
     
     NSSize segmentSize = NSMakeSize([[NSScreen mainScreen] frame].size.width / SEGMENT_COLUMNS,
                                     [[NSScreen mainScreen] frame].size.height / SEGMENT_ROWS);

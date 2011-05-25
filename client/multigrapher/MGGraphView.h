@@ -36,6 +36,7 @@
     NSString * title;
     NSColor * color;
     NSURL * dataURL;
+    bool dataLoaded;
 }
 
 - (void)updateData;

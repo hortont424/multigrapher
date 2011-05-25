@@ -50,43 +50,73 @@
 - (void)updateData
 {
     // TODO: better error handling when the server doesn't respond
-    NSString * rawData = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:nil];
+    NSError * error = nil;
+    NSString * rawData = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:&error];
+    NSString * newTitle;
+    double * newData;
+    double newMinData, newMaxData;
+    NSColor * newColor;
+    long newDataCount;
+    NSMutableIndexSet * newBarLocations;
+    
+    if(error)
+    {
+        return;
+    }
+    
     NSArray * rows = [rawData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-    title = [rows objectAtIndex:0];
-    NSArray * titleParts = [title componentsSeparatedByString:@","];
-    title = [titleParts objectAtIndex:0];
+    
+    if([rows count] < 2)
+        return;
+    
+    NSArray * titleParts = [[rows objectAtIndex:0] componentsSeparatedByString:@","];
+    
+    if([titleParts count] != 2)
+        return;
+    
+    newTitle = [titleParts objectAtIndex:0];
     
     if([titleParts count] > 1)
     {
-        color = [MGColors colorWithKey:[titleParts objectAtIndex:1]];
+        newColor = [MGColors colorWithKey:[titleParts objectAtIndex:1]];
     }
     
-    if(color == nil)
+    if(newColor == nil)
     {
-        color = [MGColors colorWithKey:@"blue"];
+        newColor = [MGColors colorWithKey:@"blue"];
     }
     
-    long rowCount = dataCount = [rows count] - 1;
-    data = (double *)calloc(dataCount, sizeof(double));
-    minData = maxData = [[rows objectAtIndex:1] doubleValue];
+    long rowCount = newDataCount = [rows count] - 1;
+    newData = (double *)calloc(newDataCount, sizeof(double));
+    newMinData = newMaxData = [[rows objectAtIndex:1] doubleValue];
     
-    barLocations = [[NSMutableIndexSet alloc] init];
+    newBarLocations = [[NSMutableIndexSet alloc] init];
     
     for(int i = 1, actualIndex = 0; i <= rowCount; i++)
     {
         if([[rows objectAtIndex:i] isEqualToString:@"--"])
         {
-            [barLocations addIndex:actualIndex];
-            dataCount--;
+            [newBarLocations addIndex:actualIndex];
+            newDataCount--;
         }
         else
         {
-            data[actualIndex] = [[rows objectAtIndex:i] doubleValue];
-            minData = MIN(minData, data[actualIndex]);
-            maxData = MAX(maxData, data[actualIndex]);
+            newData[actualIndex] = [[rows objectAtIndex:i] doubleValue];
+            newMinData = MIN(newMinData, newData[actualIndex]);
+            newMaxData = MAX(newMaxData, newData[actualIndex]);
             actualIndex++;
         }
     }
+    
+    title = newTitle;
+    color = newColor;
+    data = newData;
+    minData = newMinData;
+    maxData = newMaxData;
+    dataCount = newDataCount;
+    barLocations = newBarLocations;
+    
+    dataLoaded = true;
 }
 
 - (bool)wantsBorder
@@ -100,6 +130,21 @@
     NSString * topStr, * bottomStr, * midStr;
     NSDictionary * titleAttributes, * topAttributes, * midAttributes;
     NSPoint titleDrawPoint, topDrawPoint, bottomDrawPoint, midDrawPoint;
+    
+    if(!dataLoaded)
+    {
+        NSString * failedToLoad = @"Loading...";
+        NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     [NSFont fontWithName:@"Helvetica Bold" size:miniature ? 16.0f : 48.0f], NSFontAttributeName,
+                                     [NSColor whiteColor],NSForegroundColorAttributeName,nil];
+        
+        NSSize size = [failedToLoad sizeWithAttributes:attributes];
+        
+        [failedToLoad drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
+                                      (rect.origin.y + (rect.size.height / 2.0f) - (size.height / 2.0f))) withAttributes:attributes];
+        
+        return;
+    }
     
     if(!miniature)
     {

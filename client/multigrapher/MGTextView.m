@@ -47,8 +47,16 @@
 
 - (void)updateData
 {
-    data = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:nil];
+    NSError * error = nil;
+    
+    data = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:&error];
+    
+    if(error)
+        return;
+    
     data = [data stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    dataLoaded = true;
 }
 
 - (bool)wantsBorder
@@ -58,10 +66,25 @@
 
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature
 {
+    if(!dataLoaded)
+    {
+        NSString * failedToLoad = @"Loading...";
+        NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                     [NSFont fontWithName:@"Helvetica Bold" size:miniature ? 16.0f : 48.0f], NSFontAttributeName,
+                                     [NSColor whiteColor],NSForegroundColorAttributeName,nil];
+        
+        NSSize size = [failedToLoad sizeWithAttributes:attributes];
+        
+        [failedToLoad drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
+                                              (rect.origin.y + (rect.size.height / 2.0f) - (size.height / 2.0f))) withAttributes:attributes];
+        
+        return;
+    }
+    
     NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [NSFont fontWithName:@"Helvetica Bold" size:48.0f], NSFontAttributeName,
+                                 [NSFont fontWithName:@"Helvetica Bold" size:miniature ? 16.0f : 48.0f], NSFontAttributeName,
                                  [NSColor whiteColor],NSForegroundColorAttributeName,
-                                 [NSNumber numberWithDouble:3.0],NSKernAttributeName,nil];
+                                 [NSNumber numberWithDouble:miniature ? 1.0 : 3.0],NSKernAttributeName,nil];
     
     NSSize size = [data sizeWithAttributes:attributes];
     
