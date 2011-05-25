@@ -30,5 +30,6 @@
 - (id)initWithURL:(NSURL *)url;
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx;
 - (bool)wantsBorder;
+- (void)tick;
 
 @end

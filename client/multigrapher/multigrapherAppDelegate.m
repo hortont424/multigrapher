@@ -118,6 +118,11 @@
 
 - (void)updateTime:(NSTimer *)timer
 {
+    for(id<MGSegmentSubview> subview in [segmentCollectionView content])
+    {
+        [subview tick];
+    }
+
     [segmentCollectionView setNeedsDisplay:YES];
 }
 

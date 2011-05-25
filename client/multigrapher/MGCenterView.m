@@ -40,6 +40,11 @@
     return self;
 }
 
+- (void)tick
+{
+
+}
+
 - (bool)wantsBorder
 {
     return NO;

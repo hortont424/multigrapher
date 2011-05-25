@@ -36,16 +36,13 @@
     if(self)
     {
         dataURL = url;
-        [self updateData];
-        
-        // TODO: these should all be global, and synchronized
-        [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(tick:) userInfo:nil repeats:YES];
+        [self tick];
     }
     
     return self;
 }
 
-- (void)tick:(NSTimer *)timer
+- (void)tick
 {
     [self updateData];
 }

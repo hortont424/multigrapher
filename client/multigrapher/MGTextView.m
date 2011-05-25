@@ -35,14 +35,12 @@
     {
         dataURL = url;
         [self updateData];
-        
-        [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(tick:) userInfo:nil repeats:YES];
     }
     
     return self;
 }
 
-- (void)tick:(NSTimer *)timer
+- (void)tick
 {
     [self updateData];
 }

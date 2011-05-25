@@ -165,13 +165,13 @@
 		35DBFB32138C6FEE002C5AE6 /* Segment Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				351504291389DE8C00ABDC88 /* MGSegmentSubview.h */,
 				35DBFB33138C7613002C5AE6 /* MGBlankView.h */,
 				35DBFB34138C7613002C5AE6 /* MGBlankView.m */,
 				358E5529138B501500FF555C /* MGCenterView.h */,
 				358E552A138B501500FF555C /* MGCenterView.m */,
 				351504261389DD5800ABDC88 /* MGGraphView.h */,
 				351504271389DD5800ABDC88 /* MGGraphView.m */,
-				351504291389DE8C00ABDC88 /* MGSegmentSubview.h */,
 				351504451389F19F00ABDC88 /* MGTextView.h */,
 				351504461389F19F00ABDC88 /* MGTextView.m */,
 			);
