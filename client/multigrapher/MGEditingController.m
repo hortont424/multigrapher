@@ -34,7 +34,6 @@
 #import "MGCenterView.h"
 
 static MGEditingController * sharedInstance = nil;
-static bool haveShownInitialHelp = NO;
 
 @implementation MGEditingController
 
@@ -46,19 +45,10 @@ static bool haveShownInitialHelp = NO;
     
     if(self)
     {
-        [[[NSApp delegate] content] addObserver:self
-                                     forKeyPath:@"arrangedObjects"
-                                        options:(NSKeyValueObservingOptionNew| NSKeyValueObservingOptionOld)
-                                        context:NULL];
+        
     }
     
     return self;
-}
-
-- (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)Object change:(NSDictionary*)change context:(void*)context
-{
-    if(!haveShownInitialHelp)
-        [self setIsEditing:[self isEditing]];
 }
 
 - (void)setIsEditing:(BOOL)inIsEditing
@@ -75,32 +65,17 @@ static bool haveShownInitialHelp = NO;
         
         [NSCursor unhide];
         
-        NSRect frame;
-        
-        bool anyNonEmpty = false;
-        
-        for(id<MGSegmentSubview> sv in [[[NSApp delegate] content] arrangedObjects])
-        {
-            if(!([sv isKindOfClass:[MGBlankView class]] || [sv isKindOfClass:[MGCenterView class]]))
-                anyNonEmpty = true;
-        }
-        
-        haveShownInitialHelp |= anyNonEmpty;
-        
-        if(anyNonEmpty || haveShownInitialHelp)
-        {
-            frame = NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
-                               screenFrame.size.width / 3, screenFrame.size.height / 3);
-        }
-        else
-        {
-            frame = NSMakeRect(screenFrame.size.width / 4, screenFrame.size.height / 4,
-                               screenFrame.size.width / 2, screenFrame.size.height / 2);
-        }
-        
+        NSRect frame = NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
+                                  screenFrame.size.width / 3, screenFrame.size.height / 3);
+
         frame = NSInsetRect(frame, 5, 5);
         
-        [editWindow setFrame:frame display:YES animate:(oldIsEditing == isEditing)];
+        [editWindow setFrame:frame display:YES];
+        
+        NSRect pickerFrame = [[[[NSApp delegate] pickerCollectionView] superview] frame];
+        
+        [[[NSApp delegate] pickerCollectionView] setMinItemSize:NSMakeSize((pickerFrame.size.width / 3) - 7, pickerFrame.size.height / 2)];
+        [[[NSApp delegate] pickerCollectionView] setMaxItemSize:NSMakeSize((pickerFrame.size.width / 3) - 7, pickerFrame.size.height / 2)];
         
         [editWindow setLevel:NSModalPanelWindowLevel];
         [editWindow makeKeyAndOrderFront:nil];

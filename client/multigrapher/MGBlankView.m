@@ -52,7 +52,14 @@
 
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature
 {
-
+    if([[MGEditingController sharedInstance] isEditing])
+    {
+        [[NSColor colorWithCalibratedWhite:0.3f alpha:1.0f] setStroke];
+        [NSBezierPath setDefaultLineWidth:3.0f];
+        [[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(rect.origin.x + (rect.size.width / 2.0) - 20,
+                                                            rect.origin.y + (rect.size.height / 2.0) - 20,
+                                                            20, 20) xRadius:10 yRadius:10] stroke];
+    }
 }
 
 @end

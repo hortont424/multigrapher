@@ -126,7 +126,7 @@
     
     [segmentCollectionView setNeedsDisplay:YES];
     
-    if([[MGEditingController sharedInstance] isEditing])
+    /*if([[MGEditingController sharedInstance] isEditing])
     {
         for(int i = 0; i < [[pickerContent arrangedObjects] count]; i++)
         {
@@ -134,7 +134,7 @@
         }
         
         [pickerCollectionView setNeedsDisplay:YES];
-    }
+    }*/
 }
 
 - (void)deleteSelected
