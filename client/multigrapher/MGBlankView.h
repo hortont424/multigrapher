@@ -27,22 +27,9 @@
 
 #import "MGSegmentSubview.h"
 
-@interface MGPickerItemView : NSView
+@interface MGBlankView : NSObject<MGSegmentSubview>
 {
-    NSNetService * child;
-    BOOL selected;
-    
-    NSString * actualName;
-    Class itemClass;
-    NSURL * itemURL;
+
 }
-
-@property (nonatomic,readonly) Class itemClass;
-@property (nonatomic,readonly) NSURL * itemURL;
-
-@property (nonatomic,assign) NSNetService * child;
-@property (nonatomic,assign) BOOL selected;
-
-- (NSObject<MGSegmentSubview> *)createInstance;
 
 @end

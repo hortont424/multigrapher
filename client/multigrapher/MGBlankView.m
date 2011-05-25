@@ -23,26 +23,31 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "MGBlankView.h"
 
-#import "MGSegmentSubview.h"
+#import "MGEditingController.h"
 
-@interface MGPickerItemView : NSView
+@implementation MGBlankView
+
+- (id)initWithURL:(NSURL *)url
 {
-    NSNetService * child;
-    BOOL selected;
-    
-    NSString * actualName;
-    Class itemClass;
-    NSURL * itemURL;
+    self = [super init];
+
+    if(self)
+    {
+
+    }
+    return self;
 }
 
-@property (nonatomic,readonly) Class itemClass;
-@property (nonatomic,readonly) NSURL * itemURL;
+- (bool)wantsBorder
+{
+    return NO;
+}
 
-@property (nonatomic,assign) NSNetService * child;
-@property (nonatomic,assign) BOOL selected;
+- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx
+{
 
-- (NSObject<MGSegmentSubview> *)createInstance;
+}
 
 @end

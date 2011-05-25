@@ -25,6 +25,7 @@
 		35D8E7DE138A359500B58608 /* MGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7DD138A359500B58608 /* MGRootView.m */; };
 		35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7E0138A375500B58608 /* MGCollectionView.m */; };
 		35DBFB2D138C5B99002C5AE6 /* MGPickerItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DBFB2C138C5B99002C5AE6 /* MGPickerItemView.m */; };
+		35DBFB35138C7613002C5AE6 /* MGBlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DBFB34138C7613002C5AE6 /* MGBlankView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,8 @@
 		35D8E7E0138A375500B58608 /* MGCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCollectionView.m; sourceTree = "<group>"; };
 		35DBFB2B138C5B99002C5AE6 /* MGPickerItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPickerItemView.h; sourceTree = "<group>"; };
 		35DBFB2C138C5B99002C5AE6 /* MGPickerItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPickerItemView.m; sourceTree = "<group>"; };
+		35DBFB33138C7613002C5AE6 /* MGBlankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBlankView.h; sourceTree = "<group>"; };
+		35DBFB34138C7613002C5AE6 /* MGBlankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBlankView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,8 @@
 		35DBFB32138C6FEE002C5AE6 /* Segment Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				35DBFB33138C7613002C5AE6 /* MGBlankView.h */,
+				35DBFB34138C7613002C5AE6 /* MGBlankView.m */,
 				358E5529138B501500FF555C /* MGCenterView.h */,
 				358E552A138B501500FF555C /* MGCenterView.m */,
 				351504261389DD5800ABDC88 /* MGGraphView.h */,
@@ -249,6 +254,7 @@
 				358E552B138B501500FF555C /* MGCenterView.m in Sources */,
 				3513B11F138B732E00F1413D /* MGPanel.m in Sources */,
 				35DBFB2D138C5B99002C5AE6 /* MGPickerItemView.m in Sources */,
+				35DBFB35138C7613002C5AE6 /* MGBlankView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

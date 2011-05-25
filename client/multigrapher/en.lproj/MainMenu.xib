@@ -1329,7 +1329,7 @@
 				<string key="NSWindowClass">MGWindow</string>
 				<nil key="NSViewClass"/>
 				<object class="NSView" key="NSWindowView" id="439893737">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1406,7 +1406,6 @@
 						</object>
 					</object>
 					<string key="NSFrame">{{7, 11}, {480, 360}}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="559184995"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
@@ -1424,6 +1423,8 @@
 				<int key="NSvFlags">256</int>
 				<string key="NSFrameSize">{560, 350}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<int key="NSViewLayerContentsRedrawPolicy">2</int>
 			</object>
 			<object class="NSWindowTemplate" id="1008640093">
@@ -1535,7 +1536,7 @@
 			<object class="NSView" id="157718750">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">256</int>
-				<string key="NSFrameSize">{64, 80}</string>
+				<string key="NSFrameSize">{128, 148}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView"/>
@@ -3665,7 +3666,10 @@
 					<string>567.CustomClassName</string>
 					<string>567.IBCollectionViewIntegration.primaryColor</string>
 					<string>567.IBPluginDependency</string>
+					<string>568.CustomClassName</string>
+					<string>568.IBPluginDependency</string>
 					<string>569.CustomClassName</string>
+					<string>569.IBPluginDependency</string>
 					<string>57.IBEditorWindowLastContentRect</string>
 					<string>57.IBPluginDependency</string>
 					<string>57.ImportedFromIB2</string>
@@ -3942,7 +3946,10 @@
 					<string>MGCollectionView</string>
 					<reference ref="76322382"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>MGCollectionViewItem</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>MGPickerItemView</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{286, 129}, {275, 183}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>

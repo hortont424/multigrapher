@@ -31,7 +31,12 @@
 #import "MGGraphView.h"
 #import "MGCenterView.h"
 #import "MGTextView.h"
+#import "MGBlankView.h"
 #import "MGEditingController.h"
+#import "MGPickerItemView.h"
+
+#define SEGMENT_COLUMNS 3
+#define SEGMENT_ROWS 3
 
 @implementation multigrapherAppDelegate
 
@@ -42,11 +47,13 @@
     [[MGEditingController sharedInstance] setRootView:[window contentView]];
     [[MGEditingController sharedInstance] setEditWindow:editWindow];
 
+    allServices = [[NSMutableArray alloc] init];
+    
     [window setLevel:NSFloatingWindowLevel];
     SetSystemUIMode(kUIModeAllHidden, 0);
     
-    NSSize segmentSize = NSMakeSize([[NSScreen mainScreen] frame].size.width / 3,
-                                    [[NSScreen mainScreen] frame].size.height / 3);
+    NSSize segmentSize = NSMakeSize([[NSScreen mainScreen] frame].size.width / SEGMENT_COLUMNS,
+                                    [[NSScreen mainScreen] frame].size.height / SEGMENT_ROWS);
     
     [segmentCollectionView setMaxItemSize:segmentSize];
     [segmentCollectionView setMinItemSize:segmentSize];
@@ -62,16 +69,14 @@
     
     content = [[NSArrayController alloc] init];
     [segmentCollectionView bind:@"content" toObject:content withKeyPath:@"arrangedObjects" options:nil];
-
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sin.csv"]]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/sinover.csv"]]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/weird.csv"]]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/aapl.csv"]]];
-    [content addObject:[[MGCenterView alloc] init]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
-    [content addObject:[[MGTextView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/points.txt"]]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
-    [content addObject:[[MGGraphView alloc] initWithURL:[NSURL URLWithString:@"http://localhost/~hortont/btv-temp.csv"]]];
+    
+    for(int i = 0; i < SEGMENT_COLUMNS * SEGMENT_ROWS; i++)
+    {
+        if(i == 4)
+            [content addObject:[[MGCenterView alloc] init]];
+        else
+            [content addObject:[[MGBlankView alloc] init]];
+    }
 
     [segmentCollectionView setDelegate:self];
     [segmentCollectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
@@ -82,17 +87,32 @@
     pickerContent = [[NSArrayController alloc] init];
     [pickerCollectionView bind:@"content" toObject:pickerContent withKeyPath:@"arrangedObjects" options:nil];
     
-    [pickerContent addObject:[NSNumber numberWithInt:0]];
-    [pickerContent addObject:[NSNumber numberWithInt:1]];
-    [pickerContent addObject:[NSNumber numberWithInt:2]];
-    [pickerContent addObject:[NSNumber numberWithInt:3]];
-    [pickerContent addObject:[NSNumber numberWithInt:4]];
-    
     [pickerCollectionView setDelegate:self];
     [pickerCollectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
     [pickerCollectionView registerForDraggedTypes:[NSArray arrayWithObjects:MGPickerDragType,nil]];
     
     [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+    
+    browser = [[NSNetServiceBrowser alloc] init];
+    [browser setDelegate:self];
+    [browser searchForServicesOfType:@"_multigrapher._tcp." inDomain:@""];
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreDomainsComing
+{
+    [allServices addObject:netService];
+    [netService setDelegate:self];
+    [netService resolveWithTimeout:30.0f];
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)sender
+{
+    [pickerContent addObject:sender];
+}
+
+- (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreDomainsComing
+{
+    [pickerContent removeObject:netService];
 }
 
 - (void)updateTime:(NSTimer *)timer
@@ -179,10 +199,11 @@
     }
     else if(cv == pickerCollectionView)
     {
+        MGPickerItemView * picked = (MGPickerItemView *)[[pickerCollectionView itemAtIndex:[indexes firstIndex]] view];
         NSData * data = [NSKeyedArchiver archivedDataWithRootObject:
                          [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"MGTextView",@"type",
-                          [NSURL URLWithString:@"http://localhost/~hortont/points.txt"],@"url",nil]];
+                          NSStringFromClass([picked itemClass]),@"type",
+                          [picked itemURL],@"url",nil]];
         
         [pasteboard declareTypes:[NSArray arrayWithObject:MGPickerDragType] owner:self];
         [pasteboard setData:data forType:MGPickerDragType];

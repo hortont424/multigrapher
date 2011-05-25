@@ -30,8 +30,21 @@ import datetime
 
 CACHE_TIMEOUT = datetime.timedelta(milliseconds=100)
 
-def serve_data(name, data_function):
+class ServiceTypes(object):
+    GRAPH = 1
+    TEXT = 2
+
+def serve_data(name, type, data_function):
     port = 8000
+
+    # TODO: Could use TXT record for this??
+    if type == ServiceTypes.GRAPH:
+        name = "graph_" + name
+    elif type == ServiceTypes.TEXT:
+        name = "text_" + name
+    else:
+        name = "_" + name
+
 
     def update_cache():
         if not hasattr(update_cache, "cache_update_time"):

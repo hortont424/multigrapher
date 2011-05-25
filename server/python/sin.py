@@ -36,4 +36,4 @@ def sin_data():
 
     return "{0}\n{1}".format(header_str, data_str)
 
-multigrapher.serve_data("SIN(X)", sin_data)
+multigrapher.serve_data("SIN(X)", multigrapher.ServiceTypes.GRAPH, sin_data)

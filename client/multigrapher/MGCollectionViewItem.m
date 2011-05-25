@@ -49,7 +49,7 @@
 {
 	[super setRepresentedObject:object];
 	
-    [(MGSegmentView *)[self view] setChild:object];
+    [(MGSegmentView *)[self view] setChild:object]; // TODO: protocol (casting to wrong class in some cases)
 }
 
 - (void)setSelected:(BOOL)flag

@@ -28,7 +28,7 @@
 #define MGSegmentDragType @"MGSegmentDragType"
 #define MGPickerDragType @"MGPickerDragType"
 
-@interface multigrapherAppDelegate : NSObject <NSApplicationDelegate,NSCollectionViewDelegate>
+@interface multigrapherAppDelegate : NSObject <NSApplicationDelegate,NSCollectionViewDelegate,NSNetServiceBrowserDelegate,NSNetServiceDelegate>
 {
     NSWindow * window;
     NSPanel * editWindow;
@@ -36,6 +36,10 @@
     NSCollectionView * pickerCollectionView;
     NSArrayController * content;
     NSArrayController * pickerContent;
+    
+    NSNetServiceBrowser * browser;
+    
+    NSMutableArray * allServices;
 }
 
 @property (assign) IBOutlet NSWindow * window;

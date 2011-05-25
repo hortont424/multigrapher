@@ -24,8 +24,13 @@
  */
 
 #import "MGPickerItemView.h"
+#import "MGEditingController.h"
+#import "MGTextView.h"
+#import "MGGraphView.h"
 
 @implementation MGPickerItemView
+
+@synthesize child, selected, itemClass, itemURL;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -33,7 +38,7 @@
     
     if(self)
     {
-    
+        
     }
     
     return self;
@@ -44,17 +49,67 @@
     [super dealloc];
 }
 
+- (void)keyDown:(NSEvent *)theEvent
+{
+    [MGEditingController handleEvent:theEvent];
+}
+
+- (void)setSelected:(BOOL)inSelected
+{
+    selected = inSelected;
+    
+    [self setNeedsDisplay:YES];
+}
+
+- (void)setChild:(NSNetService *)inChild
+{
+    child = inChild;
+    
+    if(child == nil)
+        return;
+    
+    NSArray * nameParts = [[child name] componentsSeparatedByString:@"_"];
+    NSString * typeName = [nameParts objectAtIndex:0];
+    actualName = [nameParts objectAtIndex:1];
+    
+    if([typeName isEqualToString:@"graph"])
+    {
+        itemClass = [MGGraphView class];
+    }
+    else if([typeName isEqualToString:@"text"])
+    {
+        itemClass = [MGTextView class];
+    }
+    
+    itemURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d", [child hostName], [child port]]];
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
     CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
     
     CGContextSaveGState(ctx);
     
-    NSRect segmentRect = NSInsetRect([self bounds], 5, 5);
+    NSRect rect = NSInsetRect([self bounds], 5, 5);
     
-    CGContextSetGrayFillColor(ctx, 0.5f, 1.0f);
+    CGContextSetGrayFillColor(ctx, 0.2f, 1.0f);
+    CGContextFillRect(ctx, CGRectMake(rect.origin.x, rect.origin.y + 20, rect.size.width, rect.size.height - 20));
     
-    CGContextFillRect(ctx, segmentRect);
+    if(selected)
+    {
+        [[NSColor colorWithCalibratedWhite:0.3f alpha:1.0f] setStroke];
+        [NSBezierPath setDefaultLineWidth:3.0f];
+        [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 3, 3) xRadius:10 yRadius:10] stroke];
+    }
+    
+    NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 [NSFont fontWithName:@"Lucida Grande" size:13.0f], NSFontAttributeName,
+                                 [NSColor whiteColor],NSForegroundColorAttributeName,nil];
+    
+    NSSize size = [actualName sizeWithAttributes:attributes];
+    
+    [actualName drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
+                                          (rect.origin.y + 2)) withAttributes:attributes];
     
     CGContextRestoreGState(ctx);
 }
