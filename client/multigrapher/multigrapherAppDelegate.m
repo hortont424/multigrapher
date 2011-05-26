@@ -149,6 +149,11 @@
     }
 }
 
+- (IBAction)addCustomSource:(id)sender
+{
+    NSLog(@"Add Custom Source");
+}
+
 -(BOOL)collectionView:(NSCollectionView *)cv acceptDrop:(id < NSDraggingInfo >)draggingInfo index:(NSInteger)toIndex dropOperation:(NSCollectionViewDropOperation)dropOperation
 {
     if(cv == segmentCollectionView)

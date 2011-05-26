@@ -25,6 +25,9 @@
 		356FF993138DCB400097BCDC /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 356FF992138DCB400097BCDC /* README.textile */; };
 		3579FE76138B15C400DF6ABB /* MGWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 3579FE75138B15C400DF6ABB /* MGWindow.m */; };
 		3579FE79138B18D100DF6ABB /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3579FE78138B18D000DF6ABB /* Carbon.framework */; };
+		35850DB3138E2F99000B9DDD /* BGHUDButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35850DB2138E2F99000B9DDD /* BGHUDButtonCell.m */; };
+		35850DB7138E3112000B9DDD /* BGHUDPopUpButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35850DB6138E3112000B9DDD /* BGHUDPopUpButtonCell.m */; };
+		35850DB9138E332C000B9DDD /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 35850DB8138E332C000B9DDD /* gear.png */; };
 		358E552B138B501500FF555C /* MGCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 358E552A138B501500FF555C /* MGCenterView.m */; };
 		35D8E7DA138A33F100B58608 /* MGEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7D9138A33F100B58608 /* MGEditingController.m */; };
 		35D8E7DE138A359500B58608 /* MGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7DD138A359500B58608 /* MGRootView.m */; };
@@ -72,6 +75,11 @@
 		3579FE74138B15C400DF6ABB /* MGWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGWindow.h; sourceTree = "<group>"; };
 		3579FE75138B15C400DF6ABB /* MGWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGWindow.m; sourceTree = "<group>"; };
 		3579FE78138B18D000DF6ABB /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		35850DB1138E2F99000B9DDD /* BGHUDButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDButtonCell.h; sourceTree = "<group>"; };
+		35850DB2138E2F99000B9DDD /* BGHUDButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDButtonCell.m; sourceTree = "<group>"; };
+		35850DB5138E3112000B9DDD /* BGHUDPopUpButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDPopUpButtonCell.h; sourceTree = "<group>"; };
+		35850DB6138E3112000B9DDD /* BGHUDPopUpButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDPopUpButtonCell.m; sourceTree = "<group>"; };
+		35850DB8138E332C000B9DDD /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		358E5529138B501500FF555C /* MGCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCenterView.h; sourceTree = "<group>"; };
 		358E552A138B501500FF555C /* MGCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCenterView.m; sourceTree = "<group>"; };
 		35D8E7D8138A33F100B58608 /* MGEditingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGEditingController.h; sourceTree = "<group>"; };
@@ -170,6 +178,7 @@
 		3515040D1389D69000ABDC88 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				35850DB8138E332C000B9DDD /* gear.png */,
 				3515040E1389D69000ABDC88 /* multigrapher-Info.plist */,
 				3515040F1389D69000ABDC88 /* InfoPlist.strings */,
 				351504121389D69000ABDC88 /* multigrapher-Prefix.pch */,
@@ -181,6 +190,10 @@
 		356FF937138DCB190097BCDC /* BGHUDAppKit */ = {
 			isa = PBXGroup;
 			children = (
+				35850DB5138E3112000B9DDD /* BGHUDPopUpButtonCell.h */,
+				35850DB6138E3112000B9DDD /* BGHUDPopUpButtonCell.m */,
+				35850DB1138E2F99000B9DDD /* BGHUDButtonCell.h */,
+				35850DB2138E2F99000B9DDD /* BGHUDButtonCell.m */,
 				356FF947138DCB340097BCDC /* BGHUDGeometry.h */,
 				356FF950138DCB340097BCDC /* BGHUDScroller.h */,
 				356FF951138DCB340097BCDC /* BGHUDScroller.m */,
@@ -264,6 +277,7 @@
 				351504111389D69000ABDC88 /* InfoPlist.strings in Resources */,
 				3515041D1389D69000ABDC88 /* MainMenu.xib in Resources */,
 				356FF993138DCB400097BCDC /* README.textile in Resources */,
+				35850DB9138E332C000B9DDD /* gear.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +307,8 @@
 				356FF981138DCB340097BCDC /* BGHUDScrollView.m in Sources */,
 				356FF990138DCB340097BCDC /* BGTheme.m in Sources */,
 				356FF991138DCB340097BCDC /* BGThemeManager.m in Sources */,
+				35850DB3138E2F99000B9DDD /* BGHUDButtonCell.m in Sources */,
+				35850DB7138E3112000B9DDD /* BGHUDPopUpButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

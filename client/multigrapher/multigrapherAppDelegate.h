@@ -53,4 +53,6 @@
 
 - (void)deleteSelected;
 
+- (IBAction)addCustomSource:(id)sender;
+
 @end
