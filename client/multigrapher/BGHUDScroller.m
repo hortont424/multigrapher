@@ -105,8 +105,9 @@
 	// Draw knob-slot.
 	[self drawKnobSlotInRect: [self bounds] highlight: YES];
 	
-	// Draw knob
-	[self drawKnob];
+    
+    if([self knobProportion] > 0.0f)
+        [self drawKnob];
 	
 	[[self window] invalidateShadow];
 	
