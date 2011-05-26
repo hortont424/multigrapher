@@ -30,7 +30,4 @@
     
 }
 
-- (void)fadeIn;
-- (void)fadeOut;
-
 @end

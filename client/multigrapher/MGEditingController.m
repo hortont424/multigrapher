@@ -53,16 +53,12 @@ static MGEditingController * sharedInstance = nil;
 
 - (void)setIsEditing:(BOOL)inIsEditing
 {
-    bool oldIsEditing = isEditing;
     isEditing = inIsEditing;
     
     NSRect screenFrame = [[NSScreen mainScreen] frame];
     
     if(isEditing)
     {
-        if(oldIsEditing != isEditing)
-            [editWindow setAlphaValue:1.0f];
-        
         [NSCursor unhide];
         
         NSRect frame = NSMakeRect(screenFrame.size.width / 3, screenFrame.size.height / 3,
@@ -82,8 +78,7 @@ static MGEditingController * sharedInstance = nil;
     }
     else
     {
-        if(oldIsEditing != isEditing)
-            [editWindow setAlphaValue:0.0f];
+        [editWindow orderOut:nil];
         
         [NSCursor hide];
     }
