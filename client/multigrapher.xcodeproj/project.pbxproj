@@ -29,6 +29,7 @@
 		35850DB7138E3112000B9DDD /* BGHUDPopUpButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35850DB6138E3112000B9DDD /* BGHUDPopUpButtonCell.m */; };
 		35850DB9138E332C000B9DDD /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 35850DB8138E332C000B9DDD /* gear.png */; };
 		358E552B138B501500FF555C /* MGCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 358E552A138B501500FF555C /* MGCenterView.m */; };
+		35BF3B2E138F33540073600B /* BGHUDTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 35BF3B2D138F33540073600B /* BGHUDTextFieldCell.m */; };
 		35D8E7DA138A33F100B58608 /* MGEditingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7D9138A33F100B58608 /* MGEditingController.m */; };
 		35D8E7DE138A359500B58608 /* MGRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7DD138A359500B58608 /* MGRootView.m */; };
 		35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7E0138A375500B58608 /* MGCollectionView.m */; };
@@ -82,6 +83,8 @@
 		35850DB8138E332C000B9DDD /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		358E5529138B501500FF555C /* MGCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCenterView.h; sourceTree = "<group>"; };
 		358E552A138B501500FF555C /* MGCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCenterView.m; sourceTree = "<group>"; };
+		35BF3B2C138F33540073600B /* BGHUDTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDTextFieldCell.h; sourceTree = "<group>"; };
+		35BF3B2D138F33540073600B /* BGHUDTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDTextFieldCell.m; sourceTree = "<group>"; };
 		35D8E7D8138A33F100B58608 /* MGEditingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGEditingController.h; sourceTree = "<group>"; };
 		35D8E7D9138A33F100B58608 /* MGEditingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGEditingController.m; sourceTree = "<group>"; };
 		35D8E7DC138A359500B58608 /* MGRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGRootView.h; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 		356FF937138DCB190097BCDC /* BGHUDAppKit */ = {
 			isa = PBXGroup;
 			children = (
+				35BF3B2C138F33540073600B /* BGHUDTextFieldCell.h */,
+				35BF3B2D138F33540073600B /* BGHUDTextFieldCell.m */,
 				35850DB5138E3112000B9DDD /* BGHUDPopUpButtonCell.h */,
 				35850DB6138E3112000B9DDD /* BGHUDPopUpButtonCell.m */,
 				35850DB1138E2F99000B9DDD /* BGHUDButtonCell.h */,
@@ -309,6 +314,7 @@
 				356FF991138DCB340097BCDC /* BGThemeManager.m in Sources */,
 				35850DB3138E2F99000B9DDD /* BGHUDButtonCell.m in Sources */,
 				35850DB7138E3112000B9DDD /* BGHUDPopUpButtonCell.m in Sources */,
+				35BF3B2E138F33540073600B /* BGHUDTextFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

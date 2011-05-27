@@ -42,6 +42,7 @@
 @implementation multigrapherAppDelegate
 
 @synthesize window, segmentCollectionView, editWindow, pickerCollectionView, content;
+@synthesize topInstructions, bottomInstructions, customSourceURI;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -151,7 +152,18 @@
 
 - (IBAction)addCustomSource:(id)sender
 {
-    NSLog(@"Add Custom Source");
+    [[customSourceURI layer] setOpacity:0.0f];
+    [[topInstructions layer] setOpacity:1.0f];
+    [[bottomInstructions layer] setOpacity:1.0f];
+}
+
+- (IBAction)showAddCustomSource:(id)sender
+{
+    [customSourceURI setStringValue:@""];
+    [[customSourceURI window] makeFirstResponder:customSourceURI];
+    [[customSourceURI layer] setOpacity:1.0f];
+    [[topInstructions layer] setOpacity:0.0f];
+    [[bottomInstructions layer] setOpacity:0.0f];
 }
 
 -(BOOL)collectionView:(NSCollectionView *)cv acceptDrop:(id < NSDraggingInfo >)draggingInfo index:(NSInteger)toIndex dropOperation:(NSCollectionViewDropOperation)dropOperation

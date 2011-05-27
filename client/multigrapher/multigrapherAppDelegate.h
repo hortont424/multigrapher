@@ -42,6 +42,8 @@
     NSNetServiceBrowser * browser;
     
     NSMutableArray * allServices;
+    
+    NSTextField * topInstructions, * bottomInstructions, * customSourceURI;
 }
 
 @property (assign) IBOutlet NSWindow * window;
@@ -49,10 +51,15 @@
 @property (assign) IBOutlet NSCollectionView * segmentCollectionView;
 @property (assign) IBOutlet NSCollectionView * pickerCollectionView;
 
+@property (assign) IBOutlet NSTextField * topInstructions;
+@property (assign) IBOutlet NSTextField * bottomInstructions;
+@property (assign) IBOutlet NSTextField * customSourceURI;
+
 @property (assign) NSArrayController * content;
 
 - (void)deleteSelected;
 
+- (IBAction)showAddCustomSource:(id)sender;
 - (IBAction)addCustomSource:(id)sender;
 
 @end
