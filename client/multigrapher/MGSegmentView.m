@@ -77,7 +77,7 @@
     if(child && [child conformsToProtocol:@protocol(MGSegmentSubview)])
     {
         CGContextSaveGState(ctx);
-        CGContextClipToRect(ctx, segmentRect);
+        CGContextClipToRect(ctx, NSRectToCGRect(segmentRect));
         [child drawSegmentInRect:[self bounds] withContext:ctx miniature:NO];
         CGContextRestoreGState(ctx);
         
