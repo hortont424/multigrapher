@@ -36,6 +36,7 @@
     
     if(self)
     {
+        dataLoaded = NO;
         source = inSource;
         [self tick];
     }
@@ -55,8 +56,6 @@
 
 - (void)updateData
 {
-    // TODO: better error handling when the server doesn't respond
-    NSError * error = nil;
     NSString * rawData = [source loadData];
     NSString * newTitle;
     MGPoint * newData;
@@ -65,10 +64,8 @@
     long newDataCount;
     NSMutableIndexSet * newBarLocations;
     
-    if(error)
-    {
+    if(!rawData)
         return;
-    }
     
     NSArray * rows = [rawData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     
@@ -164,7 +161,7 @@
     dataCount = newDataCount;
     barLocations = newBarLocations;
     
-    dataLoaded = true;
+    dataLoaded = YES;
 }
 
 - (bool)wantsBorder

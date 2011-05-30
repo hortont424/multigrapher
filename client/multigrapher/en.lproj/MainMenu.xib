@@ -1497,7 +1497,7 @@
 									<string key="NSFrame">{{390, 0}, {15, 335}}</string>
 									<reference key="NSSuperview" ref="182009650"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="490181044"/>
+									<reference key="NSNextKeyView" ref="1037423966"/>
 									<reference key="NSTarget" ref="182009650"/>
 									<string key="NSAction">_doScroller:</string>
 									<double key="NSCurValue">1</double>
@@ -1550,6 +1550,26 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
+							</object>
+						</object>
+						<object class="NSTextField" id="1037423966">
+							<reference key="NSNextResponder" ref="1015442102"/>
+							<int key="NSvFlags">301</int>
+							<string key="NSFrame">{{53, 220}, {300, 17}}</string>
+							<reference key="NSSuperview" ref="1015442102"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="490181044"/>
+							<bool key="NSViewIsLayerTreeHost">YES</bool>
+							<int key="NSViewLayerContentsRedrawPolicy">2</int>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSTextFieldCell" key="NSCell" id="967897060">
+								<int key="NSCellFlags">68288064</int>
+								<int key="NSCellFlags2">138413056</int>
+								<string key="NSContents">No multigrapher servers found.</string>
+								<reference key="NSSupport" ref="723689825"/>
+								<reference key="NSControlView" ref="1037423966"/>
+								<reference key="NSBackgroundColor" ref="695300537"/>
+								<reference key="NSTextColor" ref="157033242"/>
 							</object>
 						</object>
 						<object class="NSTextField" id="807621266">
@@ -1681,7 +1701,6 @@
 									</object>
 									<reference key="NSMenuFont" ref="882516292"/>
 								</object>
-								<int key="NSSelectedIndex">1</int>
 								<bool key="NSPullDown">YES</bool>
 								<int key="NSPreferredEdge">1</int>
 								<bool key="NSUsesItemFromMenu">YES</bool>
@@ -2511,6 +2530,14 @@
 						<reference key="destination" ref="427622074"/>
 					</object>
 					<int key="connectionID">595</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">noServerLabel</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="1037423966"/>
+					</object>
+					<int key="connectionID">598</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3616,6 +3643,7 @@
 							<reference ref="490181044"/>
 							<reference ref="295962429"/>
 							<reference ref="427622074"/>
+							<reference ref="1037423966"/>
 						</object>
 						<reference key="parent" ref="1008640093"/>
 					</object>
@@ -3739,6 +3767,20 @@
 						<int key="objectID">592</int>
 						<reference key="object" ref="1040750639"/>
 						<reference key="parent" ref="427622074"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">596</int>
+						<reference key="object" ref="1037423966"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="967897060"/>
+						</object>
+						<reference key="parent" ref="1015442102"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">597</int>
+						<reference key="object" ref="967897060"/>
+						<reference key="parent" ref="1037423966"/>
 					</object>
 				</object>
 			</object>
@@ -4012,6 +4054,8 @@
 					<string>591.IBPluginDependency</string>
 					<string>592.CustomClassName</string>
 					<string>592.IBPluginDependency</string>
+					<string>596.IBPluginDependency</string>
+					<string>597.IBPluginDependency</string>
 					<string>72.IBPluginDependency</string>
 					<string>72.ImportedFromIB2</string>
 					<string>73.IBPluginDependency</string>
@@ -4308,6 +4352,8 @@
 					<string>BGHUDTextFieldCell</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -4347,7 +4393,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">595</int>
+			<int key="maxID">598</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4541,6 +4587,7 @@
 							<string>bottomInstructions</string>
 							<string>customSourceURI</string>
 							<string>editWindow</string>
+							<string>noServerLabel</string>
 							<string>pickerCollectionView</string>
 							<string>segmentCollectionView</string>
 							<string>topInstructions</string>
@@ -4551,6 +4598,7 @@
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>MGPanel</string>
+							<string>NSTextField</string>
 							<string>NSCollectionView</string>
 							<string>NSCollectionView</string>
 							<string>NSTextField</string>
@@ -4564,6 +4612,7 @@
 							<string>bottomInstructions</string>
 							<string>customSourceURI</string>
 							<string>editWindow</string>
+							<string>noServerLabel</string>
 							<string>pickerCollectionView</string>
 							<string>segmentCollectionView</string>
 							<string>topInstructions</string>
@@ -4582,6 +4631,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">editWindow</string>
 								<string key="candidateClassName">MGPanel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">noServerLabel</string>
+								<string key="candidateClassName">NSTextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">pickerCollectionView</string>

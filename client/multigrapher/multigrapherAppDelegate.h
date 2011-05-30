@@ -44,6 +44,7 @@
     NSMutableArray * allServices;
     
     NSTextField * topInstructions, * bottomInstructions, * customSourceURI;
+    NSTextField * noServerLabel;
 }
 
 @property (assign) IBOutlet NSWindow * window;
@@ -54,6 +55,7 @@
 @property (assign) IBOutlet NSTextField * topInstructions;
 @property (assign) IBOutlet NSTextField * bottomInstructions;
 @property (assign) IBOutlet NSTextField * customSourceURI;
+@property (assign) IBOutlet NSTextField * noServerLabel;
 
 @property (assign) NSArrayController * content;
 @property (assign) NSArrayController * pickerContent;

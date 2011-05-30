@@ -148,8 +148,6 @@
 
 - (void)attemptResolution
 {
-    NSLog(@"attempting resolution");
-    
     for(MGDataSource * src in [[[NSApp delegate] pickerContent] arrangedObjects])
     {
         if(!src.isDiscovered)
@@ -181,8 +179,6 @@
     
     if(isDiscovered)
         isResolved = isLive;
-    
-    NSLog(@"%p %d %d", self, isLive, isResolved);
     
     if(error)
         return nil;

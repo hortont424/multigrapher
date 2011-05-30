@@ -44,6 +44,7 @@
 
 @synthesize window, segmentCollectionView, editWindow, pickerCollectionView, content;
 @synthesize topInstructions, bottomInstructions, customSourceURI, pickerContent;
+@synthesize noServerLabel;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -95,11 +96,21 @@
     [pickerCollectionView setDraggingSourceOperationMask:NSDragOperationMove forLocal:YES];
     [pickerCollectionView registerForDraggedTypes:[NSArray arrayWithObjects:MGPickerDragType,nil]];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];
     
     browser = [[NSNetServiceBrowser alloc] init];
     [browser setDelegate:self];
     [browser searchForServicesOfType:@"_multigrapher._tcp." inDomain:@""];
+    
+    [pickerContent addObserver:self forKeyPath:@"arrangedObjects" options:0 context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"arrangedObjects"] && object == pickerContent)
+    {
+        noServerLabel.layer.opacity = [[pickerContent arrangedObjects] count] ? 0.0f : 1.0f;
+    }
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didFindService:(NSNetService *)netService moreComing:(BOOL)moreDomainsComing
