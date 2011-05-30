@@ -32,7 +32,7 @@
     bool isResolved;
     bool isDiscovered;
     NSString * type;
-    NSString * name;
+    NSString * shortName, * longName;
     NSURL * url;
     NSString * uuid;
     NSNetService * netService;
@@ -41,7 +41,8 @@
 @property (nonatomic, assign) bool isResolved;
 @property (nonatomic, assign) bool isDiscovered;
 @property (nonatomic, copy) NSString * type;
-@property (nonatomic, copy) NSString * name;
+@property (nonatomic, copy) NSString * shortName;
+@property (nonatomic, copy) NSString * longName;
 @property (nonatomic, copy) NSURL * url;
 @property (nonatomic, copy) NSString * uuid;
 @property (nonatomic, assign) NSNetService * netService;
@@ -53,6 +54,7 @@
 -(id)initWithCoder:(NSCoder*)coder;
 -(void)encodeWithCoder:(NSCoder*)coder;
 
+- (void)parseHeader;
 - (NSString *)loadData;
 - (id<MGSegmentSubview>)createSegmentSubview;
 

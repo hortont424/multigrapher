@@ -116,7 +116,7 @@
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreDomainsComing
 {
-    for (MGDataSource * source in [pickerContent arrangedObjects])
+    for(MGDataSource * source in [pickerContent arrangedObjects])
         if([source isDiscovered] && [[source netService] isEqualTo:netService])
             [pickerContent removeObject:source];
 }
@@ -158,6 +158,8 @@
     [[customSourceURI layer] setOpacity:0.0f];
     [[topInstructions layer] setOpacity:1.0f];
     [[bottomInstructions layer] setOpacity:1.0f];
+    
+    [pickerContent addObject:[[MGDataSource alloc] initWithURL:[NSURL URLWithString:[customSourceURI stringValue]]]];
 }
 
 - (IBAction)showAddCustomSource:(id)sender

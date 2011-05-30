@@ -33,7 +33,8 @@
 @synthesize isResolved;
 @synthesize isDiscovered;
 @synthesize type;
-@synthesize name;
+@synthesize shortName;
+@synthesize longName;
 @synthesize url;
 @synthesize uuid;
 @synthesize netService;
@@ -49,11 +50,10 @@
         
         // Used when creating a Bonjour-discovered source
         
-        NSArray * nameParts = [[service name] componentsSeparatedByString:@"_"];
-        type = [nameParts objectAtIndex:0];
-        name = [nameParts objectAtIndex:1];
         url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d", [service hostName], [service port]]];
         netService = service;
+        
+        [self parseHeader];
     }
     
     return self;
@@ -66,8 +66,13 @@
     if(self)
     {
         isDiscovered = NO;
+        isResolved = YES;
         
         // Used when creating or deserializing a custom source
+        
+        url = inURL;
+        
+        [self parseHeader];
     }
     
     return self;
@@ -96,10 +101,10 @@
         [coder decodeValueOfObjCType:@encode(bool) at:&isResolved];
         [coder decodeValueOfObjCType:@encode(bool) at:&isDiscovered];
         type = [coder decodeObject];
-        name = [coder decodeObject];
+        shortName = [coder decodeObject];
+        longName = [coder decodeObject];
         url = [coder decodeObject];
         uuid = [coder decodeObject];
-        netService = [coder decodeObject];
     }
     
     return self;
@@ -110,10 +115,10 @@
     [coder encodeValueOfObjCType:@encode(bool) at:&isResolved];
     [coder encodeValueOfObjCType:@encode(bool) at:&isDiscovered];
     [coder encodeObject:type];
-    [coder encodeObject:name];
+    [coder encodeObject:shortName];
+    [coder encodeObject:longName];
     [coder encodeObject:url];
     [coder encodeObject:uuid];
-    [coder encodeObject:netService];
 }
 
 - (NSString *)loadData
@@ -128,6 +133,27 @@
         return nil;
     
     return result;
+}
+
+- (void)parseHeader
+{
+    NSString * temporaryData = [self loadData];
+    
+    if(temporaryData)
+    {
+        NSString * headerLine = [[temporaryData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] objectAtIndex:0];
+        NSArray * nameParts = [headerLine componentsSeparatedByString:@","];
+        
+        if([nameParts count] != 4)
+        {
+            [NSException raise:@"Wrong number of arguments in data header"
+                        format:@"Got %d, wanted 4", [nameParts count]];
+        }
+        
+        shortName = [nameParts objectAtIndex:0];
+        longName = [nameParts objectAtIndex:1];
+        type = [nameParts objectAtIndex:2];
+    }
 }
 
 - (id<MGSegmentSubview>)createSegmentSubview

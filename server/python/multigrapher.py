@@ -31,29 +31,21 @@ import datetime
 CACHE_TIMEOUT = datetime.timedelta(milliseconds=100)
 
 class ServiceTypes(object):
-    GRAPH = 1
-    TEXT = 2
+    GRAPH = "graph"
+    TEXT = "text"
 
-def serve_data(name, type, data_function):
+def serve_data(short_name, long_name, type_name, data_function):
     port = 8000
 
-    # TODO: Could use TXT record for this??
-    if type == ServiceTypes.GRAPH:
-        name = "graph_" + name
-    elif type == ServiceTypes.TEXT:
-        name = "text_" + name
-    else:
-        name = "_" + name
-
+    short_name = short_name.replace(",", "")
+    long_name = long_name.replace(",", "")
 
     def update_cache():
-        if not hasattr(update_cache, "cache_update_time"):
+        if ((not hasattr(update_cache, "cache_update_time")) or
+            ((datetime.datetime.now() - update_cache.cache_update_time) > CACHE_TIMEOUT)):
             update_cache.cache_update_time = datetime.datetime.now()
-            update_cache.current_content = data_function()
-
-        if (datetime.datetime.now() - update_cache.cache_update_time) > CACHE_TIMEOUT:
-            update_cache.current_content = data_function()
-            update_cache.cache_update_time = datetime.datetime.now()
+            (color, data) = data_function()
+            update_cache.current_content = "{0},{1},{2},{3}\n{4}".format(short_name, long_name, type_name, color, data)
 
         return update_cache.current_content
 
@@ -72,7 +64,7 @@ def serve_data(name, type, data_function):
         try:
             httpd = SocketServer.TCPServer(("", port), DataHandler)
             print "HTTP server started on port {0}.".format(port)
-            bonjour_process = multiprocessing.Process(target=publish_service, args=(name, port))
+            bonjour_process = multiprocessing.Process(target=publish_service, args=(short_name, port))
             bonjour_process.start()
             httpd.serve_forever()
         except Exception as e:

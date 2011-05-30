@@ -101,9 +101,9 @@
                                  [NSFont fontWithName:@"Lucida Grande" size:13.0f], NSFontAttributeName,
                                  [NSColor whiteColor],NSForegroundColorAttributeName,nil];
     
-    NSSize size = [[child name] sizeWithAttributes:attributes];
+    NSSize size = [[child shortName] sizeWithAttributes:attributes];
     
-    [[child name] drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
+    [[child shortName] drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
                                           (rect.origin.y + 2)) withAttributes:attributes];
     
     CGContextRestoreGState(ctx);

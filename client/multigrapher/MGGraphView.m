@@ -72,10 +72,14 @@
     
     NSArray * titleParts = [[rows objectAtIndex:0] componentsSeparatedByString:@","];
     
-    if([titleParts count] != 2)
-        return;
+    if([titleParts count] != 4)
+    {
+        [NSException raise:@"Wrong number of arguments in data header"
+                    format:@"Got %d, wanted 4", [titleParts count]];
+    }
     
-    newTitle = [titleParts objectAtIndex:0];
+    newTitle = [titleParts objectAtIndex:1];
+    newColor = [titleParts objectAtIndex:3];
     
     if([titleParts count] > 1)
     {

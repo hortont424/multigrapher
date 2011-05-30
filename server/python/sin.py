@@ -31,9 +31,8 @@ import datetime
 def sin_data():
     sin_offset = float(datetime.datetime.now().time().second) / 60 * math.pi
 
-    header_str = "A Plot of SIN(X),red"
     data_str = "\n".join([str(math.sin((float(i) / 100) + sin_offset)) for i in range(0,1000)])
 
-    return "{0}\n{1}".format(header_str, data_str)
+    return ("red", data_str)
 
-multigrapher.serve_data("SIN(X)", multigrapher.ServiceTypes.GRAPH, sin_data)
+multigrapher.serve_data("SIN(X)", "A Plot of SIN(X)", multigrapher.ServiceTypes.GRAPH, sin_data)
