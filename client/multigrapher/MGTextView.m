@@ -25,16 +25,18 @@
 
 #import "MGTextView.h"
 
+#import "MGDataSource.h"
+
 @implementation MGTextView
 
-- (id)initWithURL:(NSURL *)url
+- (id)initWithDataSource:(MGDataSource *)inSource
 {
     self = [super init];
     
     if(self)
     {
-        dataURL = url;
-        [self updateData];
+        source = inSource;
+        [self tick];
     }
     
     return self;
@@ -49,7 +51,7 @@
 {
     NSError * error = nil;
     
-    data = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:&error];
+    data = [source loadData];
     
     if(error)
         return;

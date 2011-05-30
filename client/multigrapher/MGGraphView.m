@@ -25,17 +25,18 @@
 
 #import "MGGraphView.h"
 
+#import "MGDataSource.h"
 #import "MGColors.h"
 
 @implementation MGGraphView
 
-- (id)initWithURL:(NSURL *)url
+- (id)initWithDataSource:(MGDataSource *)inSource
 {
     self = [super init];
     
     if(self)
     {
-        dataURL = url;
+        source = inSource;
         [self tick];
     }
     
@@ -51,7 +52,7 @@
 {
     // TODO: better error handling when the server doesn't respond
     NSError * error = nil;
-    NSString * rawData = [NSString stringWithContentsOfURL:dataURL encoding:NSUTF8StringEncoding error:&error];
+    NSString * rawData = [source loadData];
     NSString * newTitle;
     double * newData;
     double newMinData, newMaxData;

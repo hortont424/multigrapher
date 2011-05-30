@@ -35,6 +35,7 @@
 #import "MGBlankView.h"
 #import "MGEditingController.h"
 #import "MGPickerItemView.h"
+#import "MGDataSource.h"
 
 #define SEGMENT_COLUMNS 3
 #define SEGMENT_ROWS 3
@@ -204,10 +205,10 @@
             if(!pboardData)
                 return NO;
             
-            NSDictionary * newSegmentInfo = [NSKeyedUnarchiver unarchiveObjectWithData:pboardData];
+            MGDataSource * dataSource = [NSKeyedUnarchiver unarchiveObjectWithData:pboardData];
             
             NSObject * toObj = [[content arrangedObjects] objectAtIndex:toIndex];
-            NSObject * newObj = [[NSClassFromString([newSegmentInfo objectForKey:@"type"]) alloc] initWithURL:[newSegmentInfo objectForKey:@"url"]];
+            id<MGSegmentSubview> newObj = [dataSource createSegmentSubview];
             [content removeObject:toObj];
             [content insertObject:newObj atArrangedObjectIndex:toIndex];
             [segmentCollectionView setSelectionIndexes:[[NSIndexSet alloc] init]];
@@ -256,10 +257,7 @@
     else if(cv == pickerCollectionView)
     {
         MGPickerItemView * picked = (MGPickerItemView *)[[pickerCollectionView itemAtIndex:[indexes firstIndex]] view];
-        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:
-                         [NSDictionary dictionaryWithObjectsAndKeys:
-                          NSStringFromClass([picked itemClass]),@"type",
-                          [picked itemURL],@"url",nil]];
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:[picked source]];
         
         [pasteboard declareTypes:[NSArray arrayWithObject:MGPickerDragType] owner:self];
         [pasteboard setData:data forType:MGPickerDragType];

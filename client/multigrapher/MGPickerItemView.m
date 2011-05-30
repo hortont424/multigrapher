@@ -30,7 +30,7 @@
 
 @implementation MGPickerItemView
 
-@synthesize child, selected, itemClass, itemURL, fakeItem;
+@synthesize child, selected, fakeItem, source;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -68,22 +68,9 @@
     if(child == nil)
         return;
     
-    NSArray * nameParts = [[child name] componentsSeparatedByString:@"_"];
-    NSString * typeName = [nameParts objectAtIndex:0];
-    actualName = [nameParts objectAtIndex:1];
+    source = [[MGDataSource alloc] initWithService:child];
     
-    if([typeName isEqualToString:@"graph"])
-    {
-        itemClass = [MGGraphView class];
-    }
-    else if([typeName isEqualToString:@"text"])
-    {
-        itemClass = [MGTextView class];
-    }
-    
-    itemURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d", [child hostName], [child port]]];
-    
-    fakeItem = [[itemClass alloc] initWithURL:itemURL];
+    fakeItem = [source createSegmentSubview]; 
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -116,9 +103,9 @@
                                  [NSFont fontWithName:@"Lucida Grande" size:13.0f], NSFontAttributeName,
                                  [NSColor whiteColor],NSForegroundColorAttributeName,nil];
     
-    NSSize size = [actualName sizeWithAttributes:attributes];
+    NSSize size = [[source name] sizeWithAttributes:attributes];
     
-    [actualName drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
+    [[source name] drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
                                           (rect.origin.y + 2)) withAttributes:attributes];
     
     CGContextRestoreGState(ctx);

@@ -23,43 +23,35 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "MGBlankView.h"
+#import <Foundation/Foundation.h>
 
-#import "MGEditingController.h"
+#import "MGSegmentSubview.h"
 
-@implementation MGBlankView
-
-- (id)initWithDataSource:(MGDataSource *)inSource
+@interface MGDataSource : NSObject<NSCoding>
 {
-    self = [super init];
-
-    if(self)
-    {
-
-    }
-    return self;
+    bool isResolved;
+    bool isDiscovered;
+    NSString * type;
+    NSString * name;
+    NSURL * url;
+    NSString * uuid;
 }
 
-- (void)tick
-{
-    
-}
+@property (nonatomic, assign) bool isResolved;
+@property (nonatomic, assign) bool isDiscovered;
+@property (nonatomic, copy) NSString * type;
+@property (nonatomic, copy) NSString * name;
+@property (nonatomic, copy) NSURL * url;
+@property (nonatomic, copy) NSString * uuid;
 
-- (bool)wantsBorder
-{
-    return NO;
-}
+- (id)initWithService:(NSNetService *)service;
+- (id)initWithURL:(NSURL *)inURL;
+- (id)initWithUUID:(NSString *)inUUID;
 
-- (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature
-{
-    if([[MGEditingController sharedInstance] isEditing])
-    {
-        [[NSColor colorWithCalibratedWhite:0.3f alpha:1.0f] setStroke];
-        [NSBezierPath setDefaultLineWidth:3.0f];
-        [[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(rect.origin.x + (rect.size.width / 2.0) - 20,
-                                                            rect.origin.y + (rect.size.height / 2.0) - 20,
-                                                            20, 20) xRadius:10 yRadius:10] stroke];
-    }
-}
+-(id)initWithCoder:(NSCoder*)coder;
+-(void)encodeWithCoder:(NSCoder*)coder;
+
+- (NSString *)loadData;
+- (id<MGSegmentSubview>)createSegmentSubview;
 
 @end

@@ -26,24 +26,22 @@
 #import <Cocoa/Cocoa.h>
 
 #import "MGSegmentSubview.h"
+#import "MGDataSource.h"
 
 @interface MGPickerItemView : NSView
 {
     NSNetService * child;
     BOOL selected;
     
-    NSString * actualName;
-    Class itemClass;
-    NSURL * itemURL;
+    MGDataSource * source;
     
     id<MGSegmentSubview> fakeItem;
 }
 
-@property (nonatomic,readonly) Class itemClass;
-@property (nonatomic,readonly) NSURL * itemURL;
 @property (nonatomic,readonly) id<MGSegmentSubview> fakeItem;
 
 @property (nonatomic,assign) NSNetService * child;
+@property (nonatomic,assign) MGDataSource * source;
 @property (nonatomic,assign) BOOL selected;
 
 @end

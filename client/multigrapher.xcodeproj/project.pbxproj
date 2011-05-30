@@ -35,6 +35,7 @@
 		35D8E7E1138A375500B58608 /* MGCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35D8E7E0138A375500B58608 /* MGCollectionView.m */; };
 		35DBFB2D138C5B99002C5AE6 /* MGPickerItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DBFB2C138C5B99002C5AE6 /* MGPickerItemView.m */; };
 		35DBFB35138C7613002C5AE6 /* MGBlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DBFB34138C7613002C5AE6 /* MGBlankView.m */; };
+		35DF6945139334D7005826FA /* MGDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 35DF6944139334D7005826FA /* MGDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,8 @@
 		35DBFB2C138C5B99002C5AE6 /* MGPickerItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPickerItemView.m; sourceTree = "<group>"; };
 		35DBFB33138C7613002C5AE6 /* MGBlankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGBlankView.h; sourceTree = "<group>"; };
 		35DBFB34138C7613002C5AE6 /* MGBlankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGBlankView.m; sourceTree = "<group>"; };
+		35DF6943139334D7005826FA /* MGDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGDataSource.h; sourceTree = "<group>"; };
+		35DF6944139334D7005826FA /* MGDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +162,8 @@
 				351504181389D69000ABDC88 /* multigrapherAppDelegate.h */,
 				351504191389D69000ABDC88 /* multigrapherAppDelegate.m */,
 				3515041B1389D69000ABDC88 /* MainMenu.xib */,
+				35DF6943139334D7005826FA /* MGDataSource.h */,
+				35DF6944139334D7005826FA /* MGDataSource.m */,
 				35D8E7DF138A375500B58608 /* MGCollectionView.h */,
 				35D8E7E0138A375500B58608 /* MGCollectionView.m */,
 				35D8E7DC138A359500B58608 /* MGRootView.h */,
@@ -315,6 +320,7 @@
 				35850DB3138E2F99000B9DDD /* BGHUDButtonCell.m in Sources */,
 				35850DB7138E3112000B9DDD /* BGHUDPopUpButtonCell.m in Sources */,
 				35BF3B2E138F33540073600B /* BGHUDTextFieldCell.m in Sources */,
+				35DF6945139334D7005826FA /* MGDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

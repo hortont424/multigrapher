@@ -25,9 +25,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class MGDataSource;
+
 @protocol MGSegmentSubview <NSObject>
 
-- (id)initWithURL:(NSURL *)url;
+- (id)initWithDataSource:(MGDataSource *)source;
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature;
 - (bool)wantsBorder;
 - (void)tick;

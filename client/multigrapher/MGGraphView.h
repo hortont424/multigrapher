@@ -27,15 +27,18 @@
 
 #import "MGSegmentSubview.h"
 
+@class MGDataSource;
+
 @interface MGGraphView : NSObject<MGSegmentSubview>
 {
+    MGDataSource * source;
+    
     double * data;
     double minData, maxData;
     long dataCount;
     NSMutableIndexSet * barLocations;
     NSString * title;
     NSColor * color;
-    NSURL * dataURL;
     bool dataLoaded;
 }
 

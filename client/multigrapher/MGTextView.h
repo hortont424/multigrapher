@@ -27,10 +27,13 @@
 
 #import "MGSegmentSubview.h"
 
+@class MGDataSource;
+
 @interface MGTextView : NSObject<MGSegmentSubview>
 {
+    MGDataSource * source;
+    
     NSString * data;
-    NSURL * dataURL;
     bool dataLoaded;
 }
 
