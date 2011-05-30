@@ -56,6 +56,8 @@
         hostname = [service hostName];
         netService = service;
         
+        [[[NSApp delegate] pickerContent] addObserver:self forKeyPath:@"arrangedObjects" options:0 context:nil];
+        
         [self parseHeader];
     }
     
@@ -72,6 +74,8 @@
         isResolved = YES;
         
         // Used when creating or deserializing a custom source
+        
+        [[[NSApp delegate] pickerContent] addObserver:self forKeyPath:@"arrangedObjects" options:0 context:nil];
         
         url = inURL;
         
@@ -116,6 +120,8 @@
         longName = [coder decodeObject];
         url = [coder decodeObject];
         hostname = [coder decodeObject];
+        
+        [[[NSApp delegate] pickerContent] addObserver:self forKeyPath:@"arrangedObjects" options:0 context:nil];
     }
     
     return self;
@@ -142,6 +148,8 @@
 
 - (void)attemptResolution
 {
+    NSLog(@"attempting resolution");
+    
     for(MGDataSource * src in [[[NSApp delegate] pickerContent] arrangedObjects])
     {
         if(!src.isDiscovered)
@@ -170,6 +178,11 @@
     NSString * result = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
     
     isLive = (!error && result);
+    
+    if(isDiscovered)
+        isResolved = isLive;
+    
+    NSLog(@"%p %d %d", self, isLive, isResolved);
     
     if(error)
         return nil;
