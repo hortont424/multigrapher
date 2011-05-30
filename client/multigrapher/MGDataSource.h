@@ -31,6 +31,7 @@
 {
     bool isResolved;
     bool isDiscovered;
+    bool isLive;
     NSString * type;
     NSString * shortName, * longName;
     NSURL * url;
@@ -40,6 +41,7 @@
 
 @property (nonatomic, assign) bool isResolved;
 @property (nonatomic, assign) bool isDiscovered;
+@property (nonatomic, assign) bool isLive;
 @property (nonatomic, copy) NSString * type;
 @property (nonatomic, copy) NSString * shortName;
 @property (nonatomic, copy) NSString * longName;

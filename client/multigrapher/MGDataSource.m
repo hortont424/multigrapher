@@ -33,6 +33,7 @@
 
 @synthesize isResolved;
 @synthesize isDiscovered;
+@synthesize isLive;
 @synthesize type;
 @synthesize shortName;
 @synthesize longName;
@@ -160,10 +161,15 @@
 - (NSString *)loadData
 {
     if(!isResolved)
+    {
+        isLive = NO;
         return nil;
+    }
     
     NSError * error = nil;
     NSString * result = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    
+    isLive = (!error && result);
     
     if(error)
         return nil;
