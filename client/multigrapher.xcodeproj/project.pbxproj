@@ -18,6 +18,7 @@
 		351504281389DD5800ABDC88 /* MGGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504271389DD5800ABDC88 /* MGGraphView.m */; };
 		3515043C1389E1B000ABDC88 /* MGCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3515043B1389E1B000ABDC88 /* MGCollectionViewItem.m */; };
 		351504471389F19F00ABDC88 /* MGTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 351504461389F19F00ABDC88 /* MGTextView.m */; };
+		35368E9A13943CF40093E76F /* multigrapher.icns in Resources */ = {isa = PBXBuildFile; fileRef = 35368E9913943CF40093E76F /* multigrapher.icns */; };
 		356FF980138DCB340097BCDC /* BGHUDScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 356FF951138DCB340097BCDC /* BGHUDScroller.m */; };
 		356FF981138DCB340097BCDC /* BGHUDScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 356FF953138DCB340097BCDC /* BGHUDScrollView.m */; };
 		356FF990138DCB340097BCDC /* BGTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 356FF971138DCB340097BCDC /* BGTheme.m */; };
@@ -64,6 +65,7 @@
 		3515043B1389E1B000ABDC88 /* MGCollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCollectionViewItem.m; sourceTree = "<group>"; };
 		351504451389F19F00ABDC88 /* MGTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTextView.h; sourceTree = "<group>"; };
 		351504461389F19F00ABDC88 /* MGTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTextView.m; sourceTree = "<group>"; };
+		35368E9913943CF40093E76F /* multigrapher.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = multigrapher.icns; sourceTree = SOURCE_ROOT; };
 		356FF947138DCB340097BCDC /* BGHUDGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDGeometry.h; sourceTree = "<group>"; };
 		356FF950138DCB340097BCDC /* BGHUDScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGHUDScroller.h; sourceTree = "<group>"; };
 		356FF951138DCB340097BCDC /* BGHUDScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGHUDScroller.m; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		3515040D1389D69000ABDC88 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				35368E9913943CF40093E76F /* multigrapher.icns */,
 				35850DB8138E332C000B9DDD /* gear.png */,
 				3515040E1389D69000ABDC88 /* multigrapher-Info.plist */,
 				3515040F1389D69000ABDC88 /* InfoPlist.strings */,
@@ -288,6 +291,7 @@
 				3515041D1389D69000ABDC88 /* MainMenu.xib in Resources */,
 				356FF993138DCB400097BCDC /* README.textile in Resources */,
 				35850DB9138E332C000B9DDD /* gear.png in Resources */,
+				35368E9A13943CF40093E76F /* multigrapher.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
