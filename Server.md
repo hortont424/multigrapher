@@ -16,8 +16,8 @@ entered via the Custom Source mechanism, or discovered via Bonjour.
 The HTTP server should return a CSV file when a client GETs the root,
 conforming to the following format:
 
-First row: **ShortName**,**LongName**,**SegmentType**,**Color**
-Subsequent rows: Data (format depends on SegmentType)
+* First row: **ShortName**,**LongName**,**SegmentType**,**Color**
+* Subsequent rows: Data (format depends on SegmentType)
 
 **ShortName** is displayed to the user in the source chooser.
 
