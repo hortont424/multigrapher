@@ -54,8 +54,8 @@
     NSError * error = nil;
     NSString * rawData = [source loadData];
     NSString * newTitle;
-    double * newData;
-    double newMinData, newMaxData;
+    MGPoint * newData;
+    double newMinY, newMaxY;
     NSColor * newColor;
     long newDataCount;
     NSMutableIndexSet * newBarLocations;
@@ -87,8 +87,19 @@
     }
     
     long rowCount = newDataCount = [rows count] - 1;
-    newData = (double *)calloc(newDataCount, sizeof(double));
-    newMinData = newMaxData = [[rows objectAtIndex:1] doubleValue];
+    newData = (MGPoint *)calloc(newDataCount, sizeof(MGPoint));
+    
+    NSString * firstDataRow = [rows objectAtIndex:1];
+    NSArray * firstDataRowParts = [firstDataRow componentsSeparatedByString:@","];
+    
+    if([firstDataRowParts count] == 1)
+    {
+        newMinY = newMaxY = [[firstDataRowParts objectAtIndex:0] doubleValue];
+    }
+    else if([firstDataRowParts count] == 2)
+    {
+        newMinY = newMaxY = [[firstDataRowParts objectAtIndex:1] doubleValue];
+    }
     
     newBarLocations = [[NSMutableIndexSet alloc] init];
     
@@ -101,18 +112,50 @@
         }
         else
         {
-            newData[actualIndex] = [[rows objectAtIndex:i] doubleValue];
-            newMinData = MIN(newMinData, newData[actualIndex]);
-            newMaxData = MAX(newMaxData, newData[actualIndex]);
-            actualIndex++;
+            NSString * currentRow = [rows objectAtIndex:i];
+            NSArray * rowParts = [currentRow componentsSeparatedByString:@","];
+            
+            if([rowParts count] == 1)
+            {
+                if(actualIndex == 1)
+                {
+                    newData[actualIndex].x = 0;
+                }
+                else
+                {
+                    newData[actualIndex].x = newData[actualIndex - 1].x + 1;
+                }
+                
+                newData[actualIndex].y = [[rowParts objectAtIndex:0] doubleValue];
+                
+                newMinY = MIN(newMinY, newData[actualIndex].y);
+                newMaxY = MAX(newMaxY, newData[actualIndex].y);
+                
+                actualIndex++;
+            }
+            else if([rowParts count] == 2)
+            {
+                newData[actualIndex].x = [[rowParts objectAtIndex:0] doubleValue];
+                newData[actualIndex].y = [[rowParts objectAtIndex:1] doubleValue];
+                
+                newMinY = MIN(newMinY, newData[actualIndex].y);
+                newMaxY = MAX(newMaxY, newData[actualIndex].y);
+                
+                actualIndex++;
+            }
+            else
+            {
+                NSLog(@"Too many columns: %@", currentRow);
+                newDataCount--;
+            }
         }
     }
     
     title = newTitle;
     color = newColor;
     data = newData;
-    minData = newMinData;
-    maxData = newMaxData;
+    minY = newMinY;
+    maxY = newMaxY;
     dataCount = newDataCount;
     barLocations = newBarLocations;
     
@@ -161,12 +204,12 @@
                          [NSColor darkGrayColor],NSForegroundColorAttributeName,
                          [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
         
-        topStr = [NSString stringWithFormat:@"%0.1f",maxData];
+        topStr = [NSString stringWithFormat:@"%0.1f",maxY];
         size = [topStr sizeWithAttributes:topAttributes];
         topDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
                                     rect.origin.y + rect.size.height - size.height - 15);
         
-        bottomStr = [NSString stringWithFormat:@"%0.1f",minData];
+        bottomStr = [NSString stringWithFormat:@"%0.1f",minY];
         size = [bottomStr sizeWithAttributes:topAttributes];
         bottomDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
                                        rect.origin.y + size.height * 0.5);
@@ -176,7 +219,7 @@
                          color,NSForegroundColorAttributeName,
                          [NSNumber numberWithDouble:1.0],NSKernAttributeName,nil];
         
-        midStr = [NSString stringWithFormat:@"%0.2f",data[dataCount-1]];
+        midStr = [NSString stringWithFormat:@"%0.2f",data[dataCount-1].y];
         size = [midStr sizeWithAttributes:midAttributes];
         midDrawPoint = NSMakePoint((rect.origin.x + rect.size.width - size.width - 15),
                                     rect.origin.y + (rect.size.height / 2.0f) - (size.height / 2.0f));
@@ -186,26 +229,30 @@
         rect.size.width -= size.width + 25;
     }
     
-    double xPerRow = rect.size.width / dataCount;
-    double x = rect.origin.x;
-    double amplitude = maxData - minData;
+    double yAmplitude = maxY - minY;
+    double xAmplitude = data[dataCount-1].x - data[0].x;
     
-    double scale = (rect.size.height / amplitude) * 0.9;
-    double shift = (rect.size.height / 2.0f) - ((maxData*scale + minData*scale) / 2.0f);
+    double yScale = (rect.size.height / yAmplitude) * 0.9;
+    double yShift = (rect.size.height / 2.0f) - ((maxY * yScale + minY * yScale) / 2.0f);
     
-    if([barLocations count] > 0)
-    {
-        CGContextSetGrayStrokeColor(ctx, 0.1f, 1.0f);
-        CGContextSetLineWidth(ctx, 3.0f);
-        [barLocations enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-            CGContextMoveToPoint(ctx, rect.origin.x + (xPerRow * idx), rect.origin.y);
-            CGContextAddLineToPoint(ctx, rect.origin.x + (xPerRow * idx), rect.origin.y + originalRect.size.height);
-        }];
-        CGContextStrokePath(ctx);
-    }
+    double xScale = (rect.size.width / xAmplitude);
+    double xShift = (-data[0].x * xScale) + 1;
     
     if(!miniature)
     {
+        if([barLocations count] > 0)
+        {
+            CGContextSetGrayStrokeColor(ctx, 0.1f, 1.0f);
+            CGContextSetLineWidth(ctx, 3.0f);
+            [barLocations enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+                double x = rect.origin.x + (data[idx].x * xScale) + xShift;
+                
+                CGContextMoveToPoint(ctx, x, rect.origin.y);
+                CGContextAddLineToPoint(ctx, x, rect.origin.y + originalRect.size.height);
+            }];
+            CGContextStrokePath(ctx);
+        }
+        
         [title drawAtPoint:titleDrawPoint withAttributes:titleAttributes];
         [topStr drawAtPoint:topDrawPoint withAttributes:topAttributes];
         [bottomStr drawAtPoint:bottomDrawPoint withAttributes:topAttributes];
@@ -216,7 +263,8 @@
     
     for(int i = 0; i < dataCount; i++)
     {
-        double y = rect.origin.y + (data[i] * scale) + shift;
+        double x = rect.origin.x + (data[i].x * xScale) + xShift;
+        double y = rect.origin.y + (data[i].y * yScale) + yShift;
         
         if(i == 0)
         {
@@ -226,8 +274,6 @@
         {
             CGContextAddLineToPoint(ctx, x, y);
         }
-        
-        x += xPerRow;
     }
     
     [color setStroke];

@@ -29,12 +29,18 @@
 
 @class MGDataSource;
 
+typedef struct
+{
+    double x;
+    double y;
+} MGPoint;
+
 @interface MGGraphView : NSObject<MGSegmentSubview>
 {
     MGDataSource * source;
     
-    double * data;
-    double minData, maxData;
+    MGPoint * data;
+    double minY, maxY;
     long dataCount;
     NSMutableIndexSet * barLocations;
     NSString * title;
