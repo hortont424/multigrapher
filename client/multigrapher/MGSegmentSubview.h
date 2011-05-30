@@ -33,5 +33,6 @@
 - (void)drawSegmentInRect:(NSRect)rect withContext:(CGContextRef)ctx miniature:(bool)miniature;
 - (bool)wantsBorder;
 - (void)tick;
+- (bool)isLive;
 
 @end

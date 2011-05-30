@@ -27,6 +27,8 @@
 
 #import "MGEditingController.h"
 #import "MGCenterView.h"
+#import "MGBlankView.h"
+#import "MGColors.h"
 
 @implementation MGSegmentView
 
@@ -84,6 +86,47 @@
             [[NSColor colorWithCalibratedWhite:0.1f alpha:1.0f] setStroke];
             [NSBezierPath setDefaultLineWidth:3.0f];
             [[NSBezierPath bezierPathWithRoundedRect:segmentRect xRadius:10 yRadius:10] stroke];
+        }
+        
+        if(![child isKindOfClass:[MGBlankView class]] && ![child isKindOfClass:[MGCenterView class]])
+        {
+            NSRect pillRect;
+            
+            [[MGColors colorWithKey:[child isLive] ? @"green" : @"red"] setFill];
+            
+            if(self.frame.origin.x < [[NSScreen mainScreen] frame].size.width * 0.1)
+            {
+                pillRect = NSMakeRect(segmentRect.origin.x - 7,
+                                      segmentRect.origin.y + (segmentRect.size.height / 2) - 10,
+                                      4,
+                                      20);
+            }
+            else if(self.frame.origin.x > [[NSScreen mainScreen] frame].size.width * 0.5)
+            {
+                pillRect = NSMakeRect(segmentRect.origin.x + segmentRect.size.width + 4,
+                                      segmentRect.origin.y + (segmentRect.size.height / 2) - 10,
+                                      4,
+                                      20);
+            }
+            else
+            {
+                if(self.frame.origin.y > [[NSScreen mainScreen] frame].size.width * 0.1)
+                {
+                    pillRect = NSMakeRect(segmentRect.origin.x + (segmentRect.size.width / 2) - 10,
+                                          segmentRect.origin.y - 8,
+                                          20,
+                                          4);
+                }
+                else
+                {
+                    pillRect = NSMakeRect(segmentRect.origin.x + (segmentRect.size.width / 2) - 10,
+                                          segmentRect.origin.y + segmentRect.size.height + 3,
+                                          20,
+                                          4);
+                }
+            }
+            
+            [[NSBezierPath bezierPathWithRoundedRect:pillRect xRadius:3 yRadius:3] fill];
         }
     }
     

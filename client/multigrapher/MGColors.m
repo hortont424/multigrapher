@@ -41,6 +41,7 @@ static MGColors * sharedInstance = nil;
         [colors setColor:[NSColor colorWithDeviceRed:0.078f green:0.482f blue:0.984f alpha:1.0f] forKey:@"blue"];
         [colors setColor:[NSColor colorWithDeviceRed:0.937f green:0.396f blue:0.153f alpha:1.0f] forKey:@"orange"];
         [colors setColor:[NSColor colorWithDeviceRed:0.992f green:0.220f blue:0.082f alpha:1.0f] forKey:@"red"];
+        [colors setColor:[NSColor colorWithDeviceRed:0.282f green:0.780f blue:0.086f alpha:1.0f] forKey:@"green"];
     }
     
     return self;

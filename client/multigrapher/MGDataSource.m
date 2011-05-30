@@ -200,7 +200,7 @@
 
 - (id<MGSegmentSubview>)createSegmentSubview
 {
-    Class itemClass;
+    Class itemClass = nil;
     
     if([type isEqualToString:@"graph"])
     {
@@ -210,6 +210,9 @@
     {
         itemClass = [MGTextView class];
     }
+    
+    if(itemClass == nil)
+        return nil;
     
     return [[itemClass alloc] initWithDataSource:self];
 }

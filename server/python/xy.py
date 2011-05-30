@@ -33,6 +33,6 @@ def sin_data():
 
     data_str = "\n--\n".join([str(math.log(i)) + "," + str(i) for i in range(1,10)])
 
-    return ("green", data_str)
+    return ("blue", data_str)
 
 multigrapher.serve_data("Log(x), x", "Testing Non-monotonic Data", multigrapher.ServiceTypes.GRAPH, sin_data)

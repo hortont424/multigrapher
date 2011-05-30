@@ -47,6 +47,11 @@
     [self updateData];
 }
 
+- (bool)isLive
+{
+    return [source isLive];
+}
+
 - (void)updateData
 {
     NSError * error = nil;

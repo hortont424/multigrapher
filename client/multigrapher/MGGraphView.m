@@ -48,6 +48,11 @@
     [self updateData];
 }
 
+- (bool)isLive
+{
+    return [source isLive];
+}
+
 - (void)updateData
 {
     // TODO: better error handling when the server doesn't respond
