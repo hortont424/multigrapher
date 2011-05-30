@@ -156,6 +156,7 @@
 - (IBAction)addCustomSource:(id)sender
 {
     [[customSourceURI layer] setOpacity:0.0f];
+    [[pickerCollectionView window] makeFirstResponder:pickerCollectionView];
     [[topInstructions layer] setOpacity:1.0f];
     [[bottomInstructions layer] setOpacity:1.0f];
     
