@@ -33,6 +33,8 @@
 {
     MGDataSource * source;
     
+    NSString * title;
+    NSColor * color;
     NSString * data;
     bool dataLoaded;
 }

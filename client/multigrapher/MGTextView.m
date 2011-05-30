@@ -26,6 +26,7 @@
 #import "MGTextView.h"
 
 #import "MGDataSource.h"
+#import "MGColors.h"
 
 @implementation MGTextView
 
@@ -36,6 +37,7 @@
     if(self)
     {
         source = inSource;
+        dataLoaded = NO;
         [self tick];
     }
     
@@ -55,15 +57,45 @@
 - (void)updateData
 {
     NSError * error = nil;
+    NSString * newTitle;
+    NSColor * newColor;
+    NSString * rawData = [source loadData];
     
-    data = [source loadData];
+    if(!rawData)
+        return;
+    
+    NSMutableArray * rows = [[rawData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] mutableCopy];
+    
+    if([rows count] < 2)
+        return;
+    
+    NSArray * titleParts = [[rows objectAtIndex:0] componentsSeparatedByString:@","];
+    
+    if([titleParts count] != 4)
+    {
+        [NSException raise:@"Wrong number of arguments in data header"
+                    format:@"Got %d, wanted 4", [titleParts count]];
+    }
+    
+    newTitle = [titleParts objectAtIndex:1];
+    newColor = [MGColors colorWithKey:[titleParts objectAtIndex:3]];
+    
+    if(newColor == nil)
+    {
+        newColor = [MGColors colorWithKey:@"blue"];
+    }
+    
+    [rows removeObjectAtIndex:0];
     
     if(error)
         return;
     
+    title = newTitle;
+    color = newColor;
+    data = [rows componentsJoinedByString:@"\n"];
     data = [data stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    dataLoaded = true;
+    dataLoaded = YES;
 }
 
 - (bool)wantsBorder
@@ -90,7 +122,7 @@
     
     NSDictionary * attributes = [[NSDictionary alloc] initWithObjectsAndKeys:
                                  [NSFont fontWithName:@"Helvetica Bold" size:miniature ? 16.0f : 48.0f], NSFontAttributeName,
-                                 [NSColor whiteColor],NSForegroundColorAttributeName,
+                                 color,NSForegroundColorAttributeName,
                                  [NSNumber numberWithDouble:miniature ? 1.0 : 3.0],NSKernAttributeName,nil];
     
     NSSize size = [data sizeWithAttributes:attributes];
