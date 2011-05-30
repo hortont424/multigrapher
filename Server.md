@@ -31,6 +31,34 @@ implemented in future versions.
 Acceptable choices are currently "red", "orange", "blue", or "green".
 More color choices will be implemented in future versions.
 
+Data
+----
+
+**SegmentType == "graph"**
+
+Data can be in one of two formats:
+
+    y1
+    y2
+    y3
+    y4
+
+or
+
+    x1,y1
+    x2,y2
+    x3,y3
+    x4,y4
+
+If in the first format, data is assumed to be monotonic.
+
+If a row contains only the string "--", a vertical bar is placed at that
+location in the resulting graph.
+
+**SegmentType == "text"**
+
+Data is free-form. Text is currently drawn at 48pts, regardless of content.
+
 Bonjour Service
 ---------------
 
