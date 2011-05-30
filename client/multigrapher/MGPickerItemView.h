@@ -30,18 +30,15 @@
 
 @interface MGPickerItemView : NSView
 {
-    NSNetService * child;
+    MGDataSource * child;
     BOOL selected;
-    
-    MGDataSource * source;
     
     id<MGSegmentSubview> fakeItem;
 }
 
 @property (nonatomic,readonly) id<MGSegmentSubview> fakeItem;
 
-@property (nonatomic,assign) NSNetService * child;
-@property (nonatomic,assign) MGDataSource * source;
+@property (nonatomic,assign) MGDataSource * child;
 @property (nonatomic,assign) BOOL selected;
 
 @end

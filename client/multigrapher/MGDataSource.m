@@ -36,6 +36,7 @@
 @synthesize name;
 @synthesize url;
 @synthesize uuid;
+@synthesize netService;
 
 - (id)initWithService:(NSNetService *)service
 {
@@ -52,6 +53,7 @@
         type = [nameParts objectAtIndex:0];
         name = [nameParts objectAtIndex:1];
         url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d", [service hostName], [service port]]];
+        netService = service;
     }
     
     return self;
@@ -97,6 +99,7 @@
         name = [coder decodeObject];
         url = [coder decodeObject];
         uuid = [coder decodeObject];
+        netService = [coder decodeObject];
     }
     
     return self;
@@ -110,6 +113,7 @@
     [coder encodeObject:name];
     [coder encodeObject:url];
     [coder encodeObject:uuid];
+    [coder encodeObject:netService];
 }
 
 - (NSString *)loadData

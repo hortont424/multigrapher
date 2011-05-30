@@ -35,6 +35,7 @@
     NSString * name;
     NSURL * url;
     NSString * uuid;
+    NSNetService * netService;
 }
 
 @property (nonatomic, assign) bool isResolved;
@@ -43,6 +44,7 @@
 @property (nonatomic, copy) NSString * name;
 @property (nonatomic, copy) NSURL * url;
 @property (nonatomic, copy) NSString * uuid;
+@property (nonatomic, assign) NSNetService * netService;
 
 - (id)initWithService:(NSNetService *)service;
 - (id)initWithURL:(NSURL *)inURL;

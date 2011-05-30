@@ -30,7 +30,7 @@
 
 @implementation MGPickerItemView
 
-@synthesize child, selected, fakeItem, source;
+@synthesize child, selected, fakeItem;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -61,16 +61,14 @@
     [self setNeedsDisplay:YES];
 }
 
-- (void)setChild:(NSNetService *)inChild
+- (void)setChild:(MGDataSource *)inChild
 {
     child = inChild;
     
     if(child == nil)
         return;
     
-    source = [[MGDataSource alloc] initWithService:child];
-    
-    fakeItem = [source createSegmentSubview]; 
+    fakeItem = [child createSegmentSubview]; 
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -103,9 +101,9 @@
                                  [NSFont fontWithName:@"Lucida Grande" size:13.0f], NSFontAttributeName,
                                  [NSColor whiteColor],NSForegroundColorAttributeName,nil];
     
-    NSSize size = [[source name] sizeWithAttributes:attributes];
+    NSSize size = [[child name] sizeWithAttributes:attributes];
     
-    [[source name] drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
+    [[child name] drawAtPoint:NSMakePoint((rect.origin.x + (rect.size.width / 2.0f) - (size.width / 2.0f)),
                                           (rect.origin.y + 2)) withAttributes:attributes];
     
     CGContextRestoreGState(ctx);

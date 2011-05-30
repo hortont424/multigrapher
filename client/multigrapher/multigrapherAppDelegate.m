@@ -63,8 +63,8 @@
 
     allServices = [[NSMutableArray alloc] init];
     
-    [window setLevel:NSFloatingWindowLevel];
-    SetSystemUIMode(kUIModeAllHidden, 0);
+    //[window setLevel:NSFloatingWindowLevel];
+    //SetSystemUIMode(kUIModeAllHidden, 0);
     
     NSSize segmentSize = NSMakeSize([[NSScreen mainScreen] frame].size.width / SEGMENT_COLUMNS,
                                     [[NSScreen mainScreen] frame].size.height / SEGMENT_ROWS);
@@ -109,14 +109,16 @@
     [netService resolveWithTimeout:30.0f];
 }
 
-- (void)netServiceDidResolveAddress:(NSNetService *)sender
+- (void)netServiceDidResolveAddress:(NSNetService *)netService
 {
-    [pickerContent addObject:sender];
+    [pickerContent addObject:[[MGDataSource alloc] initWithService:netService]];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)netServiceBrowser didRemoveService:(NSNetService *)netService moreComing:(BOOL)moreDomainsComing
 {
-    [pickerContent removeObject:netService];
+    for (MGDataSource * source in [pickerContent arrangedObjects])
+        if([source isDiscovered] && [[source netService] isEqualTo:netService])
+            [pickerContent removeObject:source];
 }
 
 - (void)updateTime:(NSTimer *)timer
@@ -257,7 +259,7 @@
     else if(cv == pickerCollectionView)
     {
         MGPickerItemView * picked = (MGPickerItemView *)[[pickerCollectionView itemAtIndex:[indexes firstIndex]] view];
-        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:[picked source]];
+        NSData * data = [NSKeyedArchiver archivedDataWithRootObject:[picked child]];
         
         [pasteboard declareTypes:[NSArray arrayWithObject:MGPickerDragType] owner:self];
         [pasteboard setData:data forType:MGPickerDragType];
