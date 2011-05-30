@@ -43,7 +43,7 @@
 @implementation multigrapherAppDelegate
 
 @synthesize window, segmentCollectionView, editWindow, pickerCollectionView, content;
-@synthesize topInstructions, bottomInstructions, customSourceURI;
+@synthesize topInstructions, bottomInstructions, customSourceURI, pickerContent;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {

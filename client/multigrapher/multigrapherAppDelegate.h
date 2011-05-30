@@ -56,6 +56,7 @@
 @property (assign) IBOutlet NSTextField * customSourceURI;
 
 @property (assign) NSArrayController * content;
+@property (assign) NSArrayController * pickerContent;
 
 - (void)deleteSelected;
 

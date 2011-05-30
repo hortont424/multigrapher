@@ -34,7 +34,7 @@
     NSString * type;
     NSString * shortName, * longName;
     NSURL * url;
-    NSString * uuid;
+    NSString * hostname;
     NSNetService * netService;
 }
 
@@ -44,17 +44,18 @@
 @property (nonatomic, copy) NSString * shortName;
 @property (nonatomic, copy) NSString * longName;
 @property (nonatomic, copy) NSURL * url;
-@property (nonatomic, copy) NSString * uuid;
+@property (nonatomic, copy) NSString * hostname;
 @property (nonatomic, assign) NSNetService * netService;
 
 - (id)initWithService:(NSNetService *)service;
 - (id)initWithURL:(NSURL *)inURL;
-- (id)initWithUUID:(NSString *)inUUID;
+- (id)initWithHostname:(NSString *)inHostname serviceName:(NSString *)inShortName;
 
 -(id)initWithCoder:(NSCoder*)coder;
 -(void)encodeWithCoder:(NSCoder*)coder;
 
 - (void)parseHeader;
+- (void)attemptResolution;
 - (NSString *)loadData;
 - (id<MGSegmentSubview>)createSegmentSubview;
 

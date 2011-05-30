@@ -27,6 +27,7 @@
 
 #import "MGGraphView.h"
 #import "MGTextView.h"
+#import "multigrapherAppDelegate.h"
 
 @implementation MGDataSource
 
@@ -36,7 +37,7 @@
 @synthesize shortName;
 @synthesize longName;
 @synthesize url;
-@synthesize uuid;
+@synthesize hostname;
 @synthesize netService;
 
 - (id)initWithService:(NSNetService *)service
@@ -51,6 +52,7 @@
         // Used when creating a Bonjour-discovered source
         
         url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d", [service hostName], [service port]]];
+        hostname = [service hostName];
         netService = service;
         
         [self parseHeader];
@@ -78,15 +80,23 @@
     return self;
 }
 
-- (id)initWithUUID:(NSString *)inUUID
+- (id)initWithHostname:(NSString *)inHostname serviceName:(NSString *)inShortName
 {
     self = [super init];
     
     if(self)
     {
         isDiscovered = YES;
+        isResolved = NO;
         
         // Used when deserializing a Bonjour-discovered source
+        
+        [[[NSApp delegate] pickerContent] addObserver:self forKeyPath:@"arrangedObjects" options:0 context:nil];
+        
+        hostname = inHostname;
+        shortName = inShortName;
+        
+        [self attemptResolution];
     }
     
     return self;
@@ -104,7 +114,7 @@
         shortName = [coder decodeObject];
         longName = [coder decodeObject];
         url = [coder decodeObject];
-        uuid = [coder decodeObject];
+        hostname = [coder decodeObject];
     }
     
     return self;
@@ -118,7 +128,33 @@
     [coder encodeObject:shortName];
     [coder encodeObject:longName];
     [coder encodeObject:url];
-    [coder encodeObject:uuid];
+    [coder encodeObject:hostname];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if(!isResolved && [keyPath isEqualToString:@"arrangedObjects"] && object == [[NSApp delegate] pickerContent])
+    {
+        [self attemptResolution];
+    }
+}
+
+- (void)attemptResolution
+{
+    for(MGDataSource * src in [[[NSApp delegate] pickerContent] arrangedObjects])
+    {
+        if(!src.isDiscovered)
+            continue;
+        
+        if([[src.netService hostName] isEqualToString:hostname] && [src.shortName isEqualToString:shortName])
+        {
+            isResolved = YES;
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%d", [src.netService hostName], [src.netService port]]];
+            netService = src.netService;
+            
+            [self parseHeader];
+        }
+    }
 }
 
 - (NSString *)loadData

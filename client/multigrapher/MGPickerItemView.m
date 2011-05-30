@@ -38,7 +38,7 @@
     
     if(self)
     {
-        
+        fakeItem = nil;
     }
     
     return self;
@@ -68,11 +68,15 @@
     if(child == nil)
         return;
     
-    fakeItem = [child createSegmentSubview]; 
+    if([child isResolved])
+        fakeItem = [child createSegmentSubview];
 }
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    if(fakeItem == nil && [child isResolved])
+        fakeItem = [child createSegmentSubview];
+    
     CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
     
     CGContextSaveGState(ctx);
