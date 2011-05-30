@@ -79,12 +79,7 @@
     }
     
     newTitle = [titleParts objectAtIndex:1];
-    newColor = [titleParts objectAtIndex:3];
-    
-    if([titleParts count] > 1)
-    {
-        newColor = [MGColors colorWithKey:[titleParts objectAtIndex:1]];
-    }
+    newColor = [MGColors colorWithKey:[titleParts objectAtIndex:3]];
     
     if(newColor == nil)
     {
