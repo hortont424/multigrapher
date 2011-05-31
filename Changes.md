@@ -1,3 +1,8 @@
+0.1.2 (2011.05.30)
+==================
+
+* Fix bug where data would get randomly corrupted.
+
 0.1.1 (2011.05.30)
 ==================
 
