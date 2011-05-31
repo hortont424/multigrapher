@@ -87,7 +87,11 @@
     [[NSColor colorWithCalibratedWhite:0.1f alpha:1.0f] setFill];
     [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect(iconRect, 5, 5) xRadius:10 yRadius:10] fill];
     
+    CGContextSaveGState(ctx);
+    CGContextClipToRect(ctx, NSRectToCGRect(NSInsetRect(iconRect, 5, 5)));
     [fakeItem drawSegmentInRect:NSInsetRect(iconRect, 6, 6) withContext:ctx miniature:YES];
+    CGContextRestoreGState(ctx);
+    
     
     [[NSColor colorWithCalibratedWhite:0.3f alpha:1.0f] setStroke];
     [NSBezierPath setDefaultLineWidth:3.0f];
