@@ -94,13 +94,21 @@
     NSString * firstDataRow = [rows objectAtIndex:1];
     NSArray * firstDataRowParts = [firstDataRow componentsSeparatedByString:@","];
     
+    int columnCount = 0;
+    
     if([firstDataRowParts count] == 1)
     {
         newMinY = newMaxY = [[firstDataRowParts objectAtIndex:0] doubleValue];
+        columnCount = 1;
     }
     else if([firstDataRowParts count] == 2)
     {
         newMinY = newMaxY = [[firstDataRowParts objectAtIndex:1] doubleValue];
+        columnCount = 2;
+    }
+    else
+    {
+        return;
     }
     
     newBarLocations = [[NSMutableIndexSet alloc] init];
@@ -117,9 +125,9 @@
             NSString * currentRow = [rows objectAtIndex:i];
             NSArray * rowParts = [currentRow componentsSeparatedByString:@","];
             
-            if([rowParts count] == 1)
+            if(columnCount == 1)
             {
-                if(actualIndex == 1)
+                if(actualIndex == 0)
                 {
                     newData[actualIndex].x = 0;
                 }
@@ -135,7 +143,7 @@
                 
                 actualIndex++;
             }
-            else if([rowParts count] == 2)
+            else if(columnCount == 2)
             {
                 newData[actualIndex].x = [[rowParts objectAtIndex:0] doubleValue];
                 newData[actualIndex].y = [[rowParts objectAtIndex:1] doubleValue];
@@ -262,7 +270,7 @@
     }
     
     CGContextBeginPath(ctx);
-    
+
     for(int i = 0; i < dataCount; i++)
     {
         double x = rect.origin.x + (data[i].x * xScale) + xShift;
